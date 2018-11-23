@@ -14,11 +14,6 @@
             <a href="{{asset('index.php/Menu')}}"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Pedido</a>
         </li>
         <li class="select">
-            <a href="{{asset('index.php/Menu')}}"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Mapa</a>
-        </li>
-
-
-        <li class="select">
             <a href="{{asset('index.php/Menu')}}"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Menu</a>
         </li>
         <li class="">
