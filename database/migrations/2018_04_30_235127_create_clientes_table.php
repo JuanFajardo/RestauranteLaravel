@@ -12,6 +12,7 @@ class CreateClientesTable extends Migration
           $table->increments('id');
           $table->string('cliente');
           $table->string('nit');
+          
           $table->integer('id_usuario');
           $table->softDeletes();
           $table->timestamps();

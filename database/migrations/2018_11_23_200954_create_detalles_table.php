@@ -6,26 +6,21 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDetallesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
+    public function up(){
         Schema::create('detalles', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('detalle');
+            $table->string('precio');
+            $table->string('cantidad');
+            $table->dateTime('hora');
+            $table->integer('id_pedido');
+            $table->integer('id_menu');
+            $table->integer('id_user');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
+    public function down(){
         Schema::dropIfExists('detalles');
     }
 }
