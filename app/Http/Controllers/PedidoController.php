@@ -12,21 +12,45 @@ class PedidoController extends Controller
 
   public function index(Request $request){
     $datos = Pedido::all();
+    $menus =\App\Menu::all();
+
     if ($request->ajax()) {
       return $datos;
     }else{
-      return view('pedido.index', compact('datos'));
+      return view('pedido.index', compact('datos', 'menus'));
     }
   }
 
+  public function pedidos($id){
+    $datos = \DB::table('detalles')->where('id_pedido', '=', $id)->get();
+    return $datos;
+  }
+
   public function store(Request $request){
-    $dato = new Pedido;
+    //return $request->all();
+
     $request['fecha'] = date('Y-m-d');
     $request['hora']  = date('Y-m-d H:i:s');
     $request['estado']  = 'pedido';
-    $request['user_id'] = 1;//\Auth::user()->id;
-    $dato->fill($request->all());
+    $request['id_user'] = 1;//\Auth::user()->id;
+
+    $dato = new Pedido;
+    $dato->fill( $request->all() );
     $dato->save();
+
+    $id = \DB::table('pedidos')->max('id');
+    for ($i=1; $i <= $request->contador; $i++ ){
+      $dato = new \App\Detalle;
+
+      $dato->detalle  = (explode("|", $request['pedido_'.$i]))[1];
+      $dato->precio   = $request['precio_'.$i];
+      $dato->cantidad = $request['cantidad_'.$i];
+      $dato->hora     = date('Y-m-d H:i:s');
+      $dato->id_pedido= $id;
+      $dato->id_menu  = (explode("|", $request['pedido_'.$i]))[0];
+      $dato->id_user  = 1;//\Auth::user()->id;
+      $dato->save();
+    }
     return redirect('/Pedido');
   }
 

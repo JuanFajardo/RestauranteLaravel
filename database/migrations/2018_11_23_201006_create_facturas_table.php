@@ -10,15 +10,18 @@ class CreateFacturasTable extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
           $table->increments('id');
-          $tabla->integer('numero_factura')->unsigned();
-          $tabla->integer('id_usuario')->unsigned();
-          $tabla->integer('nit')->unsigned();
-          $tabla->string('nro_autorizacion',18);
-          $tabla->string('llave',100);
-          $tabla->date('fecha_limite_emision');
-          $tabla->string('titulo',50);
-          $tabla->string('leyenda1',150);
-          $tabla->string('leyenda2',150);
+          $table->integer('numero_factura')->unsigned();
+          $table->string('nombre');
+          $table->integer('nit')->unsigned();
+          $table->date('fecha');
+          $table->float('cantidad', 10,2);
+          $table->float('total', 10,2);
+
+          $table->string('numero_autorizacion');
+          $table->string('codigo_control');
+
+          $table->integer('id_usuario')->unsigned();
+          $table->integer('id_dosificacion')->unsigned();
           $table->timestamps();
         });
     }

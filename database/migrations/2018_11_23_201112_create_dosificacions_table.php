@@ -11,15 +11,15 @@ class CreateDosificacionsTable extends Migration
     {
         Schema::create('dosificacions', function (Blueprint $table) {
             $table->increments('id');
-            $tabla->integer('numero_factura')->unsigned();
-            $tabla->integer('nit')->unsigned();
-            $tabla->string('nro_autorizacion',18);
-            $tabla->string('llave',100);
-            $tabla->date('fecha_limite_emision');
-            $tabla->string('titulo',50);
-            $tabla->string('leyenda1',150);
-            $tabla->string('leyenda2',150);
-            $tabla->integer('id_user')->unsigned();
+            $table->integer('numero_factura')->unsigned();
+            $table->integer('nit')->unsigned();
+            $table->string('nro_autorizacion',18);
+            $table->string('llave',100);
+            $table->date('fecha_limite_emision');
+            $table->string('titulo',50);
+            $table->string('leyenda1',150);
+            $table->string('leyenda2',150);
+            $table->integer('id_user')->unsigned();
             $table->timestamps();
         });
     }

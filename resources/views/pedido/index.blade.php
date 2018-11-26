@@ -12,7 +12,7 @@
     <div class="modal-content panel panel-primary">
 
       <div class="modal-header panel-heading">
-        <b>Insertar nuevo Menu</b>
+        <b>Insertar nuevo Pedido</b>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
@@ -35,6 +35,46 @@
         </div>
 
         <hr>
+        <h4>Pedido</h4>
+        <hr>
+        <div class="row">
+          <div class="col-md-7">
+            <label for="">Pedido</label>  <br>
+            <input type="text" name="" value="" id="pedido_pedido" class="form-control" list="list-pedido">
+            <datalist id="list-pedido">
+              @foreach($menus as $menu)
+                <option value="{{$menu->id}} | {{$menu->menu}}">
+              @endforeach
+            </datalist>
+          </div>
+          <div class="col-md-2">
+            <label for="">Cantidad</label>  <br>
+            <input type="text" name="" value="" id="pedido_cantidad" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <label for="">Precio</label>  <br>
+            <input type="text" name="" value="" id="pedido_precio" class="form-control">
+          </div>
+          <div class="col-md-1"><br>
+            <button type="button" name="button" class="btn btn-success" id="pedido_boton"> + </button>
+          </div>
+        </div>
+        <br>
+        <table width="90%" border="2">
+          <thead>
+            <tr>
+              <th width="40%">Pedido</th>
+              <th width="10%">Cantidad</th>
+              <th width="10%">Precio</th>
+              <th width="5%">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoTabla">
+
+          </tbody>
+        </table>
+
+        {!! Form::hidden('contador', '0', ['id'=>'contador']) !!}
 
         {!! Form::hidden('telefono', '0') !!}
         {!! Form::hidden('direccion', '0') !!}
@@ -42,7 +82,7 @@
         {!! Form::hidden('latitud', '0') !!}
         {!! Form::hidden('longitud', '0') !!}
 
-
+        <br><br>
         {!! Form::hidden('id_usuario', '1') !!}
         {!! Form::submit('A&ntilde;adir', ['class'=>'agregar btn btn-primary']) !!}
         {!! Form::close() !!}
@@ -82,6 +122,46 @@
                     </div>
 
                     <hr>
+                    <h4>Pedido</h4>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-7">
+                        <label for="">Pedido</label>  <br>
+                        <input type="text" name="" value="" id="pedido_pedido_" class="form-control" list="list-pedido_">
+                        <datalist id="list-pedido_">
+                          @foreach($menus as $menu)
+                            <option value="{{$menu->id}} | {{$menu->menu}}">
+                          @endforeach
+                        </datalist>
+                      </div>
+                      <div class="col-md-2">
+                        <label for="">Cantidad</label>  <br>
+                        <input type="text" name="" value="" id="pedido_cantidad_" class="form-control">
+                      </div>
+                      <div class="col-md-2">
+                        <label for="">Precio</label>  <br>
+                        <input type="text" name="" value="" id="pedido_precio_" class="form-control">
+                      </div>
+                      <div class="col-md-1"><br>
+                        <button type="button" name="button" class="btn btn-success" id="pedido_boton_"> + </button>
+                      </div>
+                    </div>
+                    <br>
+                    <table width="90%" border="2">
+                      <thead>
+                        <tr>
+                          <th width="40%">Pedido</th>
+                          <th width="10%">Cantidad</th>
+                          <th width="10%">Precio</th>
+                          <th width="5%">Eliminar</th>
+                        </tr>
+                      </thead>
+                      <tbody id="cuerpoTabla_">
+
+                      </tbody>
+                    </table>
+
+                    {!! Form::hidden('contador', '0', ['id'=>'contador_']) !!}
 
                     {!! Form::hidden('telefono', '0') !!}
                     {!! Form::hidden('direccion', '0') !!}
@@ -105,7 +185,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><a href="#modalAgregar"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo Pedido</a>  </div>
+                    <div class="panel-heading"><a href="#modalAgregar"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo Pedido</a>  </div><br>
                     <div class="panel-body">
                         <table id="tablaAgenda" class="table display" cellspacing="0" width="100%">
                             <thead>
@@ -114,6 +194,7 @@
                                     <th>Nombre</th>
                                     <th>Direccion</th>
                                     <th>Tipo</th>
+                                    <th>Estado</th>
                                     <th>Mesa</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -130,12 +211,21 @@
                                           @else
                                           <span class="badge badge-danger">Pedido</span>
                                           @endif
-                                          </td>
+                                        </td>
+                                        <td>
+                                          @if( $dato->estado == "pedido" )
+                                          <span class="badge badge-dark">Pedido</span>
+                                          @elseif($dato->estado == "pagado" )
+                                          <span class="badge badge-info">Pagado</span>
+                                          @elseif($dato->estado == "facturado" )
+                                          <span class="badge badge-success">Factura</span>
+                                          @endif
+                                        </td>
                                         <td>{{$dato->mesa}}</td>
                                         <td>
                                           <a href="#modalModifiar"  data-toggle="modal" class="actualizar" style="color: #B8823B;"> <li class="fa fa-edit"></li>Editar</a> &nbsp;&nbsp;&nbsp;
                                           @if( $dato->tipo != "Local")
-                                          <a href="{{asset('index.php/Mapa/'.$dato->id)}}"  data-toggle="modal" data-target="" style="color: blue;" class="eliminar"> <li class="fa fa-eye"></li>Ver</a>
+                                          <a href="{{asset('index.php/Mapa/'.$dato->id)}}"  data-toggle="modal" data-target="" style="color: blue;" > <li class="fa fa-eye"></li>Ver</a>
                                           @endif
                                         </td>
                                     </tr>
@@ -179,6 +269,43 @@
           jQuery('#form-insert').closest('form').find("input[type=text], textarea").val("");
         });
 
+        jQuery('#pedido_precio').focus(function(event){
+          var pedido   = jQuery('#pedido_pedido').val();
+          var cantidad = jQuery('#pedido_cantidad').val();
+          pedido = pedido.split('|');
+          link  = '{{ asset("/index.php/Menu/")}}/'+pedido[0];
+          jQuery.getJSON(link, function(data, textStatus) {
+              if(data.length > 0){
+                  jQuery.each(data, function(index, el) {
+                    jQuery('#pedido_precio').val(el.precio * cantidad);
+                  });
+              }
+          });
+
+        });
+
+        jQuery('#pedido_boton').click(function(event){
+          event.preventDefault();
+          var producto  = jQuery('#pedido_pedido').val();
+          var precio    = jQuery('#pedido_precio').val();
+          var cantidad  = jQuery('#pedido_cantidad').val();
+          var contador  = parseInt(jQuery('#contador').val());
+
+          if(producto.length > 0 && precio.length > 0 &&  cantidad.length > 0 ){
+            contador  =  parseInt(contador) + 1;
+            var texto = jQuery('#cuerpoTabla').html();
+            var html  = texto + "<tr data-id='"+contador+"'>"+
+                               "<td><input type='text'     id='pedido_"+contador+"' name='pedido_"+contador+"' value='"+producto+"' class='form-control'></td>" +
+                               "<td><input type='text'     id='cantidad_"+contador+"' name='cantidad_"+contador+"' value='"+cantidad+"' class='form-control'></td>" +
+                               "<td><input type='text'     id='precio_"+contador+"' name='precio_"+contador+"' value='"+precio+"' class='form-control'></td>" +
+                               "<td><input type='checkbox' id='eliminar_"+contador+"' name='eliminar_"+contador+"' value='eliminar' > <i class='fa fa-trash'></i> </td>" +
+                               "</tr>";
+            jQuery('#pedido_pedido').val(''); jQuery('#pedido_precio').val(''); jQuery('#pedido_cantidad').val('');
+            jQuery('#contador').val(contador);
+            jQuery('#cuerpoTabla').html(html);
+          }
+        });
+
         jQuery('.actualizar').click(function(event){
             event.preventDefault();
             var fila = jQuery(this).parents('tr');
@@ -189,7 +316,7 @@
             link  = '{{ asset("/index.php/Pedido/")}}/'+id;
 
             jQuery.getJSON(link, function(data, textStatus) {
-                if(data.length > 0){
+                if( data.length > 0 ){
                     jQuery.each(data, function(index, el) {
                       jQuery('#nombre').val(el.nombre);
                       jQuery('#ci').val(el.ci);
@@ -197,6 +324,65 @@
                     });
                 }
             });
+
+            link2  = '{{ asset("/index.php/Pedidos/")}}/'+id;
+            jQuery.getJSON(link2, function(data, textStatus) {
+                if( data.length > 0 ){
+                    var html ='';
+                    var contador = 0;
+                    jQuery.each(data, function(index, el) {
+                      contador ++;
+                      html  = html+  "<tr data-id='"+contador+"'>"+
+                                         "<td><input type='text'     id='pedido_"+contador+"_' name='pedido_"+contador+"' value='"+el.detalle+"' class='form-control'></td>" +
+                                         "<td><input type='text'     id='cantidad_"+contador+"_' name='cantidad_"+contador+"' value='"+el.cantidad+"' class='form-control'></td>" +
+                                         "<td><input type='text'     id='precio_"+contador+"_' name='precio_"+contador+"' value='"+el.precio+"' class='form-control'></td>" +
+                                         "<td><input type='checkbox' id='eliminar_"+contador+"_' name='eliminar_"+contador+"' value='eliminar' > <i class='fa fa-trash'></i> </td>" +
+                                         "</tr>";
+                      jQuery('#contador_').val(contador);
+                      jQuery('#cuerpoTabla_').html(html);
+                    });
+                }
+            });
+
+            jQuery('#pedido_boton_').click(function(event){
+              event.preventDefault();
+              var producto  = jQuery('#pedido_pedido_').val();
+              var precio    = jQuery('#pedido_precio_').val();
+              var cantidad  = jQuery('#pedido_cantidad_').val();
+              var contador  = parseInt(jQuery('#contador_').val());
+
+              if(producto.length > 0 && precio.length > 0 &&  cantidad.length > 0 ){
+                contador  =  parseInt(contador) + 1;
+                var texto = jQuery('#cuerpoTabla_').html();
+                var html  = texto + "<tr data-id='"+contador+"'>"+
+                                   "<td><input type='text'     id='pedido_"+contador+"_' name='pedido_"+contador+"' value='"+producto+"' class='form-control'></td>" +
+                                   "<td><input type='text'     id='cantidad_"+contador+"_' name='cantidad_"+contador+"' value='"+cantidad+"' class='form-control'></td>" +
+                                   "<td><input type='text'     id='precio_"+contador+"_' name='precio_"+contador+"' value='"+precio+"' class='form-control'></td>" +
+                                   "<td><input type='checkbox' id='eliminar_"+contador+"_' name='eliminar_"+contador+"' value='eliminar' > <i class='fa fa-trash'></i> </td>" +
+                                   "</tr>";
+                jQuery('#pedido_pedido_').val(''); jQuery('#pedido_precio_').val(''); jQuery('#pedido_cantidad_').val('');
+                jQuery('#contador_').val(contador);
+                jQuery('#cuerpoTabla_').html(html);
+              }
+            });
+
+            jQuery('#pedido_precio_').focus(function(event){
+              var pedido   = jQuery('#pedido_pedido_').val();
+              var cantidad = jQuery('#pedido_cantidad_').val();
+              pedido = pedido.split('|');
+              link  = '{{ asset("/index.php/Menu/")}}/'+pedido[0];
+              jQuery.getJSON(link, function(data, textStatus) {
+                  if(data.length > 0){
+                      jQuery.each(data, function(index, el) {
+                        jQuery('#pedido_precio_').val(el.precio * cantidad);
+                      });
+                  }
+              });
+
+            });
+
+
         });
+
     </script>
 @endsection
