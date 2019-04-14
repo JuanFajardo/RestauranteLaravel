@@ -1,10 +1,22 @@
 @extends('maestro')
-@section('card-header') EMPLEADOS  @endsection
+@section('card-header')
+<div class="row">
+  <div class="col-md-6 text-left">
+    EMPLEADOS
+  </div>
+  <div class="col-md-6 text-right">
+    <a href="#modalAgregar"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo EMPLEADO</a> <br/>
+  </div>
+</div>
+@endsection
 
 
 @section('empleado')   @endsection
 @section('titulo') Empleado @endsection
 
+@section('menuEmpleado')
+class="active"
+@endsection
 
 @section('modal1')
 <div id="modalAgregar" class="modal fade" role="dialog">
@@ -54,7 +66,7 @@
         <div class="row">
           <div class="col-md-4">
             <label for="fecha_nacimiento_" > <b><i>Fecha Nacimiento</i></b> </label>
-            {!! Form::text('fecha_nacimiento', null, ['class'=>'form-control', 'placeholder'=>'Fecha Nacimiento', 'id'=>'fecha_nacimiento_', 'required']) !!}
+            {!! Form::date('fecha_nacimiento', null, ['class'=>'form-control', 'placeholder'=>'Fecha Nacimiento', 'id'=>'fecha_nacimiento_', 'required']) !!}
           </div>
           <div class="col-md-4">
             <label for="zona_" > <b><i>Zona</i></b> </label>
@@ -124,7 +136,7 @@
                     <div class="row">
                       <div class="col-md-4">
                         <label for="fecha_nacimiento_" > <b><i>Fecha Nacimiento</i></b> </label>
-                        {!! Form::text('fecha_nacimiento', null, ['class'=>'form-control', 'placeholder'=>'Fecha Nacimiento', 'id'=>'fecha_nacimiento', 'required']) !!}
+                        {!! Form::date('fecha_nacimiento', null, ['class'=>'form-control', 'placeholder'=>'Fecha Nacimiento', 'id'=>'fecha_nacimiento', 'required']) !!}
                       </div>
                       <div class="col-md-4">
                         <label for="zona_" > <b><i>Zona</i></b> </label>
@@ -154,7 +166,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><a href="#modalAgregar"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo Empleado</a>  </div>
+                    <div class="panel-heading">  </div>
                     <div class="panel-body">
                         <table id="tablaAgenda" class="table display" cellspacing="0" width="100%">
                             <thead>

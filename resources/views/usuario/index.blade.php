@@ -1,5 +1,14 @@
 @extends('maestro')
-@section('card-header') Usuarios  @endsection
+@section('card-header')
+<div class="row">
+  <div class="col-md-6 text-left">
+    USUARIOS
+  </div>
+  <div class="col-md-6 text-right">
+    <a href="{{asset('/index.php/register')}}"  class="nuevo" data-target=""> <li class="fa fa-plus"></li>  Nuevo USUARIO</a> <br/>
+  </div>
+</div>
+@endsection
 
 
 @section('empleado')   @endsection
@@ -13,7 +22,7 @@ active
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><a href="{{asset('/index.php/register')}}"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo </a>  </div>
+                    <div class="panel-heading">  </div>
                     <div class="panel-body">
                         <table id="tablaAgenda" class="table display" cellspacing="0" width="100%">
                             <thead>

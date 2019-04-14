@@ -7,7 +7,7 @@ use \App\Inventario;
 class InventarioController extends Controller
 {
   public function __construct(){
-  //$this->middleware('auth');
+    $this->middleware('auth');
   }
 
   public function index(Request $request){
@@ -21,7 +21,7 @@ class InventarioController extends Controller
 
   public function store(Request $request){
     $dato = new Inventario;
-    $request['user_id'] = 1;//\Auth::user()->id;
+    $request['user_id'] = \Auth::user()->id;
 
     if( $request->tipo == "USO" ){
       $request['fecha_uso'] = date('Y-m-d');
@@ -41,14 +41,14 @@ class InventarioController extends Controller
 
   public function update(Request $request, $id){
     $dato = Inventario::find($id);
-    $request['user_id'] = 1;//\Auth::user()->id;
+    $request['user_id'] = \Auth::user()->id;
 
     if( $request->tipo == "USO" ){
       $request['fecha_uso'] = date('Y-m-d');
     }else{
       $request['fecha_baja'] = date('Y-m-d');
     }
-    
+
     $dato->fill($request->all());
     $dato->save();
     return redirect('/Inventario');

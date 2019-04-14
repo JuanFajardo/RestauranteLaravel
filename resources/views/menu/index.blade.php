@@ -1,10 +1,22 @@
 @extends('maestro')
-@section('card-header') MENU  @endsection
+@section('card-header')
+<div class="row">
+  <div class="col-md-6 text-left">
+    MENU
+  </div>
+  <div class="col-md-6 text-right">
+    <a href="#modalAgregar"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo MENU</a> <br/>
+  </div>
+</div>
+@endsection
 
 
 @section('empleado')   @endsection
 @section('titulo') Proveedor @endsection
 
+@section('menuMenu')
+class="active"
+@endsection
 
 @section('modal1')
 <div id="modalAgregar" class="modal fade" role="dialog">
@@ -39,9 +51,12 @@
             <label for="imagen_" > <b><i>Imagen</i></b> </label>
             {!! Form::file('imagen', null, ['class'=>'form-control', 'placeholder'=>'Imagen', 'id'=>'imagen_', 'required']) !!}
           </div>
-          <div class="col-md-4">
+          <div class="col-md-1">
+
+          </div>
+          <div class="col-md-5">
             <label for="receta_" > <b><i>Receta</i></b> </label>
-            {!! Form::text('receta', null, ['class'=>'form-control', 'placeholder'=>'Receta', 'id'=>'receta_', 'required']) !!}
+            {!! Form::textarea('receta', null, ['class'=>'form-control', 'placeholder'=>'Receta', 'id'=>'receta_', 'required']) !!}
           </div>
         </div>
 
@@ -90,7 +105,10 @@
                         <label for="imagen_" > <b><i>Imagen</i></b> </label><br>
                         <img src="" width="150" id="imagen" alt="">
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-1">
+
+                      </div>
+                      <div class="col-md-5">
                         <label for="receta_" > <b><i>Receta</i></b> </label>
                         {!! Form::text('receta', null, ['class'=>'form-control', 'placeholder'=>'Receta', 'id'=>'receta', 'required']) !!}
                       </div>
@@ -114,7 +132,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><a href="#modalAgregar"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo Menu</a>  </div>
+                    <div class="panel-heading"> </div>
                     <div class="panel-body">
                         <table id="tablaAgenda" class="table display" cellspacing="0" width="100%">
                             <thead>

@@ -1,10 +1,22 @@
 @extends('maestro')
-@section('card-header') Pedido  @endsection
+@section('card-header')
+<div class="row">
+  <div class="col-md-6 text-left">
+    PEDIDO
+  </div>
+  <div class="col-md-6 text-right">
+    <a href="#modalAgregar"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo PEDIDO</a> <br/>
+  </div>
+</div>
+@endsection
 
 
 @section('empleado')   @endsection
 @section('titulo') Pedido @endsection
 
+@section('menuPedido')
+class="active"
+@endsection
 
 @section('modal1')
 <div id="modalAgregar" class="modal fade" role="dialog">
@@ -185,7 +197,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><a href="#modalAgregar"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo Pedido</a>  </div><br>
+                    <div class="panel-heading"> </div><br>
                     <div class="panel-body">
                         <table id="tablaAgenda" class="table display" cellspacing="0" width="100%">
                             <thead>

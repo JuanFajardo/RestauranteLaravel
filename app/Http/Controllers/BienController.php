@@ -7,7 +7,7 @@ use \App\Bien;
 class BienController extends Controller
 {
   public function __construct(){
-  //$this->middleware('auth');
+    $this->middleware('auth');
   }
 
   public function index(Request $request){
@@ -22,7 +22,7 @@ class BienController extends Controller
 
   public function store(Request $request){
     $dato = new Bien;
-    $request['user_id'] = 1;//\Auth::user()->id;
+    $request['user_id'] = \Auth::user()->id;
     $dato->fill($request->all());
     $dato->save();
     return redirect('/Bien');
@@ -35,7 +35,7 @@ class BienController extends Controller
 
   public function update(Request $request, $id){
     $dato = Bien::find($id);
-    $request['user_id'] = 1;//\Auth::user()->id;
+    $request['user_id'] = \Auth::user()->id;
     $dato->fill($request->all());
     $dato->save();
     return redirect('/Bien');

@@ -59,15 +59,15 @@
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-epanded="false">
-                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
-                            {{Session::get('nombres', '')}} {{Session::get('apellidos', '') }}
+                            <b>{{ \Auth::user()->name }}</b>
                         </a>
                         <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="{{asset('index.php/Usuario/')}}/{{Session::get('id', '')}}/edit"><i class="fa fa- user"></i>Mi cuenta</a>
-                                <a class="nav-link" href="{{asset('index.php/cerrarsession')}}"><i class="fa fa-power -off"></i>Cerrar Sesion</a>
-
-
-
+                                <a class="nav-link" href="{{asset('index.php/clave/')}}"><i class="fa fa-user"></i> Cambiar Clave</a>
+                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out fa-fw"></i> Cerrar Sesion </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                                  {{ csrf_field() }}
+                                </form>
                         </div>
                     </div>
                     <div class="language-select dropdown" id="language-select">

@@ -7,7 +7,7 @@ use \App\Empleado;
 class EmpleadoController extends Controller
 {
   public function __construct(){
-  //$this->middleware('auth');
+    $this->middleware('auth');
   }
 
   public function index(Request $request){
@@ -21,7 +21,7 @@ class EmpleadoController extends Controller
 
   public function store(Request $request){
     $dato = new Empleado;
-    $request['user_id'] = 1;//\Auth::user()->id;
+    $request['user_id'] = \Auth::user()->id;
     $dato->fill($request->all());
     $dato->save();
     return redirect('/Empleado');
@@ -34,7 +34,7 @@ class EmpleadoController extends Controller
 
   public function update(Request $request, $id){
     $dato = Empleado::find($id);
-    $request['user_id'] = 1;//\Auth::user()->id;
+    $request['user_id'] = \Auth::user()->id;
     $dato->fill($request->all());
     $dato->save();
     return redirect('/Empleado');

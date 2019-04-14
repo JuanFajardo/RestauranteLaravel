@@ -7,7 +7,7 @@ use App\Pedido;
 class PedidoController extends Controller
 {
   public function __construct(){
-  //$this->middleware('auth');
+    $this->middleware('auth');
   }
 
   public function index(Request $request){
@@ -27,12 +27,10 @@ class PedidoController extends Controller
   }
 
   public function store(Request $request){
-    //return $request->all();
-
     $request['fecha'] = date('Y-m-d');
     $request['hora']  = date('Y-m-d H:i:s');
     $request['estado']  = 'pedido';
-    $request['id_user'] = 1;//\Auth::user()->id;
+    $request['id_user'] = \Auth::user()->id;
 
     $dato = new Pedido;
     $dato->fill( $request->all() );
@@ -48,7 +46,7 @@ class PedidoController extends Controller
       $dato->hora     = date('Y-m-d H:i:s');
       $dato->id_pedido= $id;
       $dato->id_menu  = (explode("|", $request['pedido_'.$i]))[0];
-      $dato->id_user  = 1;//\Auth::user()->id;
+      $dato->id_user  = \Auth::user()->id;
       $dato->save();
     }
     return redirect('/Pedido');
@@ -61,7 +59,7 @@ class PedidoController extends Controller
 
   public function update(Request $request, $id){
     $dato = Pedido::find($id);
-    $request['user_id'] = 1;//\Auth::user()->id;
+    $request['user_id'] = \Auth::user()->id;
     $dato->fill($request->all());
     $dato->save();
     return redirect('/Pedido');
