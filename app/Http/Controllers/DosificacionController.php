@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Dosificacion;
 
 class DosificacionController extends Controller
 {
@@ -11,10 +12,10 @@ class DosificacionController extends Controller
   }
 
   public function index(){
-    $dosificaciones=\DB::table('dosificaciones')->get();
-    $actual=\DB::table('dosificaciones')->orderBy('id','DESC')->first();
+    $dosificaciones=\DB::table('dosificacions')->get();
+    $actual=\DB::table('dosificacions')->orderBy('id','DESC')->first();
     $flag=(count($actual)==0)? 0:1;
-    return view("dosificaciones/listar",compact("dosificaciones","actual","flag"));
+    return view("dosificacion.index",compact("dosificaciones","actual","flag"));
   }
 
   public function store(Request $request){
@@ -27,15 +28,17 @@ class DosificacionController extends Controller
       'leyenda1'=>'required',
       'leyenda2'=>'required',
       ]);
-      $request['id_usuario']  = \Auth::user()->id;
-      $dosificacion= new dosificaciones;
+      $request['id_user']  = \Auth::user()->id;
+      $request['estado']   = 'Activo';
+      
+      $dosificacion= new Dosificacion;
       $dosificacion->fill( $request->all() );
       $dosificacion->save();
-      return redirect('Dosificacion');
+      return redirect('/Dosificacion');
   }
 
   public function show($id){
-        $dosificacion = dosificaciones::find($id);
+        $dosificacion = Dosificacion::find($id);
         return "[".$dosificacion."]";
   }
 
@@ -50,8 +53,8 @@ class DosificacionController extends Controller
         'leyenda2'=>'required',
         ]);
             $id=$request->id;
-            $request['id_usuario']  = \Auth::user()->id;
-            $datos = dosificaciones::find($id);
+            $request['id_user']  = \Auth::user()->id;
+            $datos = Dosificacion::find($id);
             $datos->fill( $request->all() );
             $datos->save();
           return redirect('SIIM/Dosificacion');
@@ -60,7 +63,7 @@ class DosificacionController extends Controller
 
   public function destroy(Request $request){
       $id=$request->id_borrar;
-      $dosificacion = dosificaciones::find($id);
+      $dosificacion = Dosificacion::find($id);
       $dosificacion->delete();
       return redirect('SIIM/Dosificacion');
   }

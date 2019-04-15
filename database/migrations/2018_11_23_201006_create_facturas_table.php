@@ -22,6 +22,7 @@ class CreateFacturasTable extends Migration
 
           $table->integer('id_usuario')->unsigned();
           $table->integer('id_dosificacion')->unsigned();
+          $table->integer('id_pedido');
           $table->timestamps();
         });
     }

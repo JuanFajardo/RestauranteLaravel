@@ -111,12 +111,12 @@ class="active"
             <div class="modal-content panel panel-warning ">
 
                 <div class="modal-header panel-heading">
-                    <b>Actualizar Proveedor</b>
+                    <b>Actualizar Pedido</b>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <div class="modal-body panel-body">
-                    {!! Form::open(['route'=>['Proveedor.update', ':DATO_ID'], 'method'=>'PATCH', 'id'=>'form-update' ])!!}
+                    {!! Form::open(['route'=>['Pedido.update', ':DATO_ID'], 'method'=>'PATCH', 'id'=>'form-update' ])!!}
 
                     <div class="row">
                       <div class="col-md-6">
@@ -184,6 +184,9 @@ class="active"
                     {!! Form::hidden('id_usuario', '1') !!}
 
                     {!! Form::submit('Actualizar ', ['class'=>'btn btn-warning']) !!}
+                    {!! Form::submit('Pagar Y facturar', ['class'=>'btn btn-danger']) !!}
+                    {!! Form::checkbox('pagar', 'pagar', false, ['class'=>'btn btn-danger']) !!}
+
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -236,6 +239,8 @@ class="active"
                                         <td>{{$dato->mesa}}</td>
                                         <td>
                                           <a href="#modalModifiar"  data-toggle="modal" class="actualizar" style="color: #B8823B;"> <li class="fa fa-edit"></li>Editar</a> &nbsp;&nbsp;&nbsp;
+
+                                          <a href="{{asset('/index.php/Facturar/'.$dato->id)}}"  data-toggle="modal" class="actualizar" style="color: #1c48b4;"> <li class="fa fa-qrcode"></li>Factura</a> &nbsp;&nbsp;&nbsp;
                                           @if( $dato->tipo != "Local")
                                           <a href="{{asset('index.php/Mapa/'.$dato->id)}}"  data-toggle="modal" data-target="" style="color: blue;" > <li class="fa fa-eye"></li>Ver</a>
                                           @endif
@@ -307,10 +312,10 @@ class="active"
             contador  =  parseInt(contador) + 1;
             var texto = jQuery('#cuerpoTabla').html();
             var html  = texto + "<tr data-id='"+contador+"'>"+
-                               "<td><input type='text'     id='pedido_"+contador+"' name='pedido_"+contador+"' value='"+producto+"' class='form-control'></td>" +
-                               "<td><input type='text'     id='cantidad_"+contador+"' name='cantidad_"+contador+"' value='"+cantidad+"' class='form-control'></td>" +
-                               "<td><input type='text'     id='precio_"+contador+"' name='precio_"+contador+"' value='"+precio+"' class='form-control'></td>" +
-                               "<td><input type='checkbox' id='eliminar_"+contador+"' name='eliminar_"+contador+"' value='eliminar' > <i class='fa fa-trash'></i> </td>" +
+                               "<td><input type='text'     id='pedido_"+contador+"'   name='pedido_"+contador+"'    value='"+producto+"' class='form-control'></td>" +
+                               "<td><input type='text'     id='cantidad_"+contador+"' name='cantidad_"+contador+"'  value='"+cantidad+"' class='form-control'></td>" +
+                               "<td><input type='text'     id='precio_"+contador+"'   name='precio_"+contador+"'    value='"+precio+"' class='form-control'></td>" +
+                               "<td><input type='checkbox' id='eliminar_"+contador+"' name='eliminar_"+contador+"'  value='eliminar' > <i class='fa fa-trash'></i> </td>" +
                                "</tr>";
             jQuery('#pedido_pedido').val(''); jQuery('#pedido_precio').val(''); jQuery('#pedido_cantidad').val('');
             jQuery('#contador').val(contador);
@@ -345,7 +350,7 @@ class="active"
                     jQuery.each(data, function(index, el) {
                       contador ++;
                       html  = html+  "<tr data-id='"+contador+"'>"+
-                                         "<td><input type='text'     id='pedido_"+contador+"_' name='pedido_"+contador+"' value='"+el.detalle+"' class='form-control'></td>" +
+                                         "<td><input type='text'     id='pedido_"+contador+"_' name='pedido_"+contador+"' value='"+el.id+"|"+el.detalle+"' class='form-control'></td>" +
                                          "<td><input type='text'     id='cantidad_"+contador+"_' name='cantidad_"+contador+"' value='"+el.cantidad+"' class='form-control'></td>" +
                                          "<td><input type='text'     id='precio_"+contador+"_' name='precio_"+contador+"' value='"+el.precio+"' class='form-control'></td>" +
                                          "<td><input type='checkbox' id='eliminar_"+contador+"_' name='eliminar_"+contador+"' value='eliminar' > <i class='fa fa-trash'></i> </td>" +
