@@ -6,7 +6,7 @@
 
         <h3 class="menu-title">Sistema</h3><!-- /.menu-title -->
         <li @yield('menuFactura')>
-            <a href="{{asset('index.php/Menu')}}"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Factura</a>
+            <a href="{{asset('index.php/Dosificacion')}}"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Factura</a>
         </li>
         <li @yield('menuPedido')>
             <a href="{{asset('index.php/Pedido')}}"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Pedido</a>

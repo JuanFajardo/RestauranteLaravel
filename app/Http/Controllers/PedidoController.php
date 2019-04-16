@@ -137,6 +137,17 @@ class PedidoController extends Controller
     }
   }
 
+  public function factura($id){
+    $dosificacion   = Dosificacion::where('estado' , 'Activo')->get();
+    
+    $datos = \DB::table('pedidos')->join('detalles', 'pedidos.id', '=', 'detalles.id_pedido')
+                                  ->join('facturas', 'pedidos.id', '=', 'facturas.id_pedido')
+                                  ->where('pedidos.id', '=', $id)
+                                  ->get();
+
+    return view('factura.factura', compact('datos', 'dosificacion'));
+  }
+
   public function destroy(Request $request, $id){
     if( $request->ajax() ){
       $dato = Pedido::find($id);

@@ -30,7 +30,7 @@ class DosificacionController extends Controller
       ]);
       $request['id_user']  = \Auth::user()->id;
       $request['estado']   = 'Activo';
-      
+
       $dosificacion= new Dosificacion;
       $dosificacion->fill( $request->all() );
       $dosificacion->save();
@@ -59,6 +59,16 @@ class DosificacionController extends Controller
             $datos->save();
           return redirect('SIIM/Dosificacion');
 
+  }
+
+  public function dosificacion($nro_autorizacion, $numero_factura, $ci, $fecha, $costo_total, $dosificacion){
+    $codigo_control  = \App\Clases\CodigoControlV7::generar($nro_autorizacion,
+                                                         $numero_factura,
+                                                         $ci,
+                                                         $fecha,
+                                                         $costo_total,
+                                                         $dosificacion);
+   return array(["codigo"=>$codigo_control]);
   }
 
   public function destroy(Request $request){

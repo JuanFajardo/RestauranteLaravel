@@ -20,9 +20,36 @@ class="active"
 
 
 @section('cuerpo')
-<style>
+<div class="row">
+  <div class="col-md-2">
+    <input type="text" name="nro_autorizacion" id="nro_autorizacion" placeholder="Nro Autorizacion" value="" class="form-control">
+  </div>
+  <div class="col-md-2">
+    <input type="text" name="numero_factura" id="numero_factura" placeholder="Nro Factura" value="" class="form-control">
+  </div>
+  <div class="col-md-2">
+    <input type="text" name="ci" id="ci" placeholder="ci" value="" class="form-control">
+  </div>
+  <div class="col-md-2">
+    <input type="text" name="fecha" id="fecha" placeholder="yyyymmdd" value="" class="form-control">
+  </div>
+  <div class="col-md-2">
+    <input type="text" name="costo_total" id="costo_total" placeholder="Costo Total" value="" class="form-control">
+  </div>
+  <div class="col-md-2">
+    <input type="text" name="dosificacion" id="dosificacion" placeholder="Dosificacion" value="" class="form-control">
+  </div>
+</div>
 
-</style>
+<div class="row">
+  <div class="col-md-4">
+    <button type="button" name="button" class="btn btn-warning" class="form-control" id="botonVerificar"> <i class="fa fa-qrcode"></i> Verificar Codigo de Control</button>
+  </div>
+  <div class="col-md-8">
+    <input type="text" name="codigo" id="codigo" placeholder="Codigo Control" value="" class="form-control">
+  </div>
+</div>
+
 <br>
 <div class="panel">
   <div class="panel-body panel-info">
@@ -43,15 +70,14 @@ class="active"
     <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
 <br><br>
-<table id="tablaAgenda" class="table table-bordered table-hover" cellspacing="0" width="100%">
+<table id="tablaDosificacion" class="table table-bordered table-hover" cellspacing="0" width="100%">
     <thead>
     <tr>
         <td>#</td>
-        <th>Nro Â° Factura</th>
+        <th>Nro  Factura</th>
         <th>NIT</th>
-        <th>NÂ° de Autorizacion</th>
+        <th>Nro de Autorizacion</th>
         <th>Fecha De Registro</th>
-        <th>Opciones</th>
     </tr>
     </thead>
     <tbody>
@@ -63,10 +89,6 @@ class="active"
             <td>{{$dosificacion->nit}}</td>
             <td>{{$dosificacion->nro_autorizacion}}</td>
             <td>{{$dosificacion->created_at}}</td>
-            <td>
-                <!--<a href="#ActualizarDosificacion" data-toggle="modal" class="config"  onclick="ver(this.id);" id="{{$dosificacion->id}}"><li class="fa fa-edit"></li> Editar</a>-->
-                <!--&nbsp;&nbsp;&nbsp;&nbsp;<a href="#EliminarDosificacion" style="color:#F3565D;" onclick="eliminar(this.id);" id="{{$dosificacion->id}}" data-toggle="modal" class="config"><span class="fa fa-trash-o"></span> Eliminar</a>-->
-            </td>
         </tr>
     @endforeach
     </tbody>
@@ -86,48 +108,59 @@ class="active"
             </div>
             <div class="modal-body">
               {!! Form::open(array('url' => 'Dosificacion', 'method' => 'post')) !!}
-            <table class="table table-hover">
-              <tr>
-                <td>Numero de Factura</td>
-                <td><input type="text" name="numero_factura" class='form-control' ></td>
-              </tr>
-              <tr>
-                <td>NIT</td>
-                <td><input type="text" name="nit" class='form-control' ></td>
-              </tr>
-              <tr>
-                <td>NÂ° de Autorizaci&oacute;n</td>
-                <td><input type="text" name="nro_autorizacion" class='form-control' ></td>
-              </tr>
-              <tr>
-                <td>Llave</td>
-                <td><input type="text" name="llave" class='form-control' ></td>
-              </tr>
-              <tr>
-                <td>Fecha Limite de EmisiÃ³n</td>
-                <td><input type="text" name="fecha_limite_emision" class='form-control' ></td>
-              </tr>
-              <tr>
-                <td>Titulo</td>
-                <td><input type="text" name="titulo" class='form-control' ></td>
-              </tr>
-              <tr>
-                <td>Leyenda 1</td>
-                <td>
-                    <textarea name="leyenda1" class='form-control'  rows="4"></textarea>
-                </td>
-              </tr>
-              <tr>
-                <td>Leyenda 2</td>
-                <td>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="">Numero de Factura</label>
+                  <input type="text" name="numero_factura" class='form-control' >
+                </div>
+                <div class="col-md-6">
+                  <label for="">NIT</label>
+                  <input type="text" name="nit" class='form-control' >
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="">N° de Autorizaci&oacute;n</label>
+                  <input type="text" name="nro_autorizacion" class='form-control' >
+                </div>
+                <div class="col-md-6">
+                  <label for="">Llave</label>
+                  <input type="text" name="llave" class='form-control' >
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="">Fecha Limite de Emisión</label>
+                  <input type="text" name="fecha_limite_emision" class='form-control' >
+                </div>
+                <div class="col-md-6">
+                  <label for="">Titulo</label>
+                  <input type="text" name="titulo" class='form-control' >
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="">Leyenda 1</label>
+                  <textarea name="leyenda1" class='form-control'  rows="4"></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="">Leyenda 2</label>
                   <textarea name="leyenda2" class='form-control'  rows="4"></textarea>
-                  </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td align="right"><input type="submit" name="Registrar" class='btn btn-success' value="Registrar"></td>
-              </tr>
-            </table>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="row">
+                <div class="col-d-3">
+                  <input type="submit" name="Registrar" class='btn btn-success' value="Registrar">
+                </div>
+              </div>
+
             {!! Form::close() !!}
             </div>
             <div class="modal-footer">
@@ -277,9 +310,9 @@ class="active"
 </div>
 @stop
 @section('js')
-<script>
-$(document).ready(function(){
-            $('#tablaAgenda').DataTable({
+<script type="text/javascript">
+jQuery(document).ready(function(){
+            jQuery('#tablaDosificacion').DataTable({
                 "order": [[ 0, 'asc']],
                 "language":
                 {
@@ -305,36 +338,44 @@ $(document).ready(function(){
 
 });
 
-function ver(id)
-{
-  event.preventDefault();
-  url  = '{{ asset("/index.php/SIIM/Dosificacion")}}/'+id;
+  jQuery('#botonVerificar').click(function(){
 
- $.getJSON(url, null, function(data) {
-     if(data.length>0)
-     {
-         $.each(data, function(field, e)
-         {
-             $('#numero_factura').val(e.numero_factura);
-             $('#nit').val(e.nit);
-             $('#nro_autorizacion').val(e.nro_autorizacion);
-             $('#llave').val(e.llave);
-             $('#fecha_limite_emision').val(e.fecha_limite_emision);
-             $('#titulo').val(e.titulo);
-             $('#leyenda1').val(e.leyenda1);
-             $('#leyenda2').val(e.leyenda2);
-             $('#id').val(e.id);
+    var  nro_autorizacion = jQuery('#nro_autorizacion').val();
+    var  numero_factura   = jQuery('#numero_factura').val();
+    var  ci               = jQuery('#ci').val();
+    var  fecha            = jQuery('#fecha').val();
+    var  costo_total      = jQuery('#costo_total').val();
+    var  dosificacion     = jQuery('#dosificacion').val();
 
-         });
-     }
- });
-}
-function eliminar(id)
-{
-var form = $('#form-delete');
-var url = form.attr('action').replace(':DATO_ID',id);
-var data = form.serialize();
-$("#id_borrar").val(id);
-}
+    url  = '{{ asset("/index.php/Dosificacion")}}/'+nro_autorizacion+'/'+numero_factura+'/'+ci+'/'+fecha+'/'+costo_total+'/'+dosificacion;
+    jQuery.getJSON(url, null, function(data) {
+       if(data.length>0){
+           jQuery.each(data, function(field, e){
+               jQuery('#codigo').val(e.codigo);
+           });
+       }
+    });
+
+  });
+
+  function ver(id){
+    event.preventDefault();
+    url  = '{{ asset("/index.php/SIIM/Dosificacion")}}/'+id;
+    $.getJSON(url, null, function(data) {
+       if(data.length>0){
+           $.each(data, function(field, e){
+               $('#numero_factura').val(e.numero_factura);
+               $('#nit').val(e.nit);
+               $('#nro_autorizacion').val(e.nro_autorizacion);
+               $('#llave').val(e.llave);
+               $('#fecha_limite_emision').val(e.fecha_limite_emision);
+               $('#titulo').val(e.titulo);
+               $('#leyenda1').val(e.leyenda1);
+               $('#leyenda2').val(e.leyenda2);
+               $('#id').val(e.id);
+           });
+       }
+    });
+  }
 </script>
 @stop

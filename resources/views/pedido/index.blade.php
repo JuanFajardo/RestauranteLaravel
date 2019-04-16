@@ -238,11 +238,12 @@ class="active"
                                         </td>
                                         <td>{{$dato->mesa}}</td>
                                         <td>
-                                          <a href="#modalModifiar"  data-toggle="modal" class="actualizar" style="color: #B8823B;"> <li class="fa fa-edit"></li>Editar</a> &nbsp;&nbsp;&nbsp;
-
-                                          <a href="{{asset('/index.php/Facturar/'.$dato->id)}}"  data-toggle="modal" class="actualizar" style="color: #1c48b4;"> <li class="fa fa-qrcode"></li>Factura</a> &nbsp;&nbsp;&nbsp;
+                                          <a href="#modalModifiar"  data-toggle="modal" class="actualizar" style="color: #B8823B;"> <li class="fa fa-edit"></li> Editar</a> &nbsp;&nbsp;&nbsp;
+                                          @if($dato->estado == "facturado" || $dato->estado == "pagado"   )
+                                            <a href="{{asset('/index.php/Facturar/'.$dato->id)}}"  style="color: #1c48b4;"> <li class="fa fa-qrcode"></li> Factura</a> &nbsp;&nbsp;&nbsp;
+                                          @endif
                                           @if( $dato->tipo != "Local")
-                                          <a href="{{asset('index.php/Mapa/'.$dato->id)}}"  data-toggle="modal" data-target="" style="color: blue;" > <li class="fa fa-eye"></li>Ver</a>
+                                            <a href="{{asset('index.php/Mapa/'.$dato->id)}}"   style="color: #308e15;" > <li class="fa fa-eye"></li> Ver</a>
                                           @endif
                                         </td>
                                     </tr>

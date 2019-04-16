@@ -17,6 +17,7 @@ Route::post('/clave', 'HomeController@clavePost')->name('usuario.cambiar');
 
 Route::resource('Proveedor', 'ProveedorController');
 Route::resource('Dosificacion', 'DosificacionController');
+Route::get('Dosificacion/{nro_autorizacion}/{numero_factura}/{ci}/{fecha}/{costo_total}/{dosificacion}', 'DosificacionController@dosificacion');
 Route::resource('Unidad', 'UnidadController');
 Route::resource('Bien', 'BienController');
 Route::resource('Cliente', 'ClienteController');
@@ -28,6 +29,6 @@ Route::resource('Menu', 'MenuController');
 Route::get('Pedidos/{id}', 'PedidoController@pedidos');
 
 Route::get('Pagar/{id}', 'PedidoController@pagar');
-Route::get('Facturar/{id}', 'PedidoController@pfactura');
+Route::get('Facturar/{id}', 'PedidoController@factura');
 
 Route::get('Mapa/{id}', 'PedidoController@mapa');

@@ -77,12 +77,12 @@ id_dosificacion	1
               <table cellpadding="2" border="0" width="240">
                 <tr>
                   <td align='center'>
-                    RESTAURANTE
+                    PIZZERIA
                   </td>
                 </tr>
                 <tr>
                   <td align='center'>
-                    XXXXX
+                    PIZARRON
                   </td>
                 </tr>
                 <tr>
@@ -125,16 +125,17 @@ id_dosificacion	1
                     </tr>
                 </table>
             </div>
-
             <hr>
-            <span style="width:240px;"><center>Actividad: Servicios y/o actividades sujetas al IVA<br>
-            Ch'utillos 2017</center></span><br>
+            <span style="width:240px;">
+              <center>
+                Actividad: Servicios y/o actividades sujetas al IVA {{date('Y')}}
+              </center></span><br>
             <div>
               <table cellpanding='2'  width="240">
                 <tr>
                   <td colspan="2">Fecha:<b> {{$datos[0]->fecha}}</b></td>
 
-                  <td colspan="2">Hora: <b>{{$datos[0]->hora}}</b></td>
+                  <td colspan="2">Hora: <b>{{ date('H:i:s', strtotime($datos[0]->hora)) }}</b></td>
                 </tr><tr>
                   <td>NIT/CI:</td><td>{{$datos[0]->nit}}</td>
                 </tr><tr>
@@ -144,12 +145,18 @@ id_dosificacion	1
 
                 <table border="0" class="css-info_table">
                     <tr class='css-header_table'>
-                        <th align="left">Calle</th>
+                        <th align="left">Producto</th>
                         <th align="left">#</th>
                         <th align="left">Precio</th>
                     </tr>
-                    <!--aqui ingresa el detalle-->
-                  <code>   </code>
+                    @foreach($datos as $dato)
+                      <tr>
+                        <td>{{$dato->detalle}}</td>
+                        <td>{{$dato->cantidad}}</td>
+                        <td>{{$dato->precio}}</td>
+                      </tr>
+                    @endforeach
+
                     <tr><td colspan="4" style="border-top:solid 1px grey;"></td></tr>
                     <tr>
                           <td align="left"></td>
@@ -160,14 +167,14 @@ id_dosificacion	1
             </div>
             <hr>
             <div>
-                <p>Son: sdfsdf 00/100 Bolivianos</p>
+                <p>Son: {{\App\Clases\Letras::to_word( $datos[0]->precio )}}  00/100 Bolivianos</p>
             <hr>
                 <p>C&oacute;digo de control: <b>{{ $datos[0]->codigo_control }}</b></p>
                 <p>Fecha l&iacute;mite de emisi&oacute;n: <b>{{ $dosificacion[0]->fecha_limite_emision }}</b>
                 </p>
             </div>
             <div class="css-content_center" >
-              <img src="" alt="QR Code">
+              {!! QrCode::size(100)->generate( $datos[0]->codigo_control."|".$datos[0]->ci ); !!}
             </div>
             <hr>
             <div class="css-content_center">
