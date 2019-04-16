@@ -1,21 +1,25 @@
-@extends('layouts/app')
+@extends('maestro')
+@section('card-header')
+<div class="row">
+  <div class="col-md-6 text-left">
+    DOSIFICACION
+  </div>
+  <div class="col-md-6 text-right">
+    <a href="#NuevoDosificacion"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo DOSIFICACION</a> <br/>
+  </div>
+</div>
+@endsection
 
-@section('tituloPagina')
-    SIIM - dosificacion
-@stop
 
-@section('tituloSistema')
-    Sistema de Impuesto Interno Municipal
-@stop
+@section('empleado')   @endsection
+@section('titulo') Dosificacion @endsection
 
-@section('tituloPortada')
-<i class="fa fa-credit-card"></i>  Dosificacion de Facturas
-@stop
+@section('menuDosificacion')
+class="active"
+@endsection
 
-@section('siim') active @endsection
-@section('siim1') active @endsection
 
-@section('content')
+@section('cuerpo')
 <style>
 
 </style>
@@ -31,9 +35,6 @@
         </ul>
     </div>
     @endif
-<a href="#NuevoDosificacion" data-toggle="modal" class="btn btn-success" >
-<li class="fa fa-plus"></li> Nueva Dosificaci&oacute;n</a>
-&nbsp;&nbsp;&nbsp;&nbsp;
 
 <a href="#dosificacionActual" data-toggle="modal" class="btn btn-info">
 <li class="fa fa-check-square"></li> Ver Dosificaci&oacute;n Actual</a>
@@ -63,8 +64,8 @@
             <td>{{$dosificacion->nro_autorizacion}}</td>
             <td>{{$dosificacion->created_at}}</td>
             <td>
-                <a href="#ActualizarDosificacion" data-toggle="modal" class="config"  onclick="ver(this.id);" id="{{$dosificacion->id}}"><li class="fa fa-edit"></li> Editar</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="#EliminarDosificacion" style="color:#F3565D;" onclick="eliminar(this.id);" id="{{$dosificacion->id}}" data-toggle="modal" class="config"><span class="fa fa-trash-o"></span> Eliminar</a>
+                <!--<a href="#ActualizarDosificacion" data-toggle="modal" class="config"  onclick="ver(this.id);" id="{{$dosificacion->id}}"><li class="fa fa-edit"></li> Editar</a>-->
+                <!--&nbsp;&nbsp;&nbsp;&nbsp;<a href="#EliminarDosificacion" style="color:#F3565D;" onclick="eliminar(this.id);" id="{{$dosificacion->id}}" data-toggle="modal" class="config"><span class="fa fa-trash-o"></span> Eliminar</a>-->
             </td>
         </tr>
     @endforeach
@@ -77,7 +78,7 @@
 
 @section('modal1')
 <div class="modal fade" id="NuevoDosificacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content panel panel-success">
             <div class="modal-header panel-heading">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -143,6 +144,7 @@
   font-weight: bold;
 }
 </style>
+
 @section('modal2')
 <div class="modal fade" id="dosificacionActual" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -336,4 +338,3 @@ $("#id_borrar").val(id);
 }
 </script>
 @stop
-

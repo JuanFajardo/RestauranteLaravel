@@ -17,6 +17,7 @@ class CreateDosificacionsTable extends Migration
             $table->string('llave',100);
             $table->date('fecha_limite_emision');
             $table->string('titulo',50);
+            $table->string('estado',50);
             $table->string('leyenda1',150);
             $table->string('leyenda2',150);
             $table->integer('id_user')->unsigned();

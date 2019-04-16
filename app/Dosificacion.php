@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dosificacion extends Model
 {
-  protected $table = 'dosificaciones';
-  protected $fillable = array('id','numero_factura','id_usuario','nit','nro_autorizacion','llave','fecha_limite_emision','titulo','leyenda1', 'leyenda2');
+  protected $table = 'dosificacions';
+  protected $fillable = array('id','numero_factura','id_user','nit','nro_autorizacion','llave','fecha_limite_emision', 'estado', 'titulo','leyenda1', 'leyenda2');
 }
