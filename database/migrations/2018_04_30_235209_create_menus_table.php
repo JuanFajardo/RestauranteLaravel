@@ -15,6 +15,7 @@ class CreateMenusTable extends Migration
           $table->date('fecha');
           $table->string('imagen');
           $table->text('receta');
+          $table->text('permanente')->comment('si - para la soda y cosas que siempre estaran');
           $table->integer('id_usuario');
           $table->softDeletes();
           $table->timestamps();

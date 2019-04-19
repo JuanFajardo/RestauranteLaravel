@@ -16,8 +16,10 @@ class PedidoController extends Controller
 
   public function index(Request $request){
     $datos = Pedido::all();
-    $menus =\App\Menu::all();
 
+    $menus = \DB::table('menus')->where('permanente', '=', 'si')
+                                ->orWhere('fecha', 'like', '%'.date('Y-m-d').'%')
+                                ->get();
     if ($request->ajax()) {
       return $datos;
     }else{
@@ -139,7 +141,7 @@ class PedidoController extends Controller
 
   public function factura($id){
     $dosificacion   = Dosificacion::where('estado' , 'Activo')->get();
-    
+
     $datos = \DB::table('pedidos')->join('detalles', 'pedidos.id', '=', 'detalles.id_pedido')
                                   ->join('facturas', 'pedidos.id', '=', 'facturas.id_pedido')
                                   ->where('pedidos.id', '=', $id)

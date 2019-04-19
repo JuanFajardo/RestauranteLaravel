@@ -20,6 +20,7 @@ class MenuController extends Controller
   }
 
   public function store(Request $request){
+    $request['permanente'] = isset($request->permanente) ? $request->permanente : "no";
     $dato = new Menu;
     $request['user_id'] = \Auth::user()->id;
     $dato->fill($request->all());
@@ -33,6 +34,7 @@ class MenuController extends Controller
   }
 
   public function update(Request $request, $id){
+    $request['permanente'] = isset($request->permanente) ? $request->permanente : "no";
     $dato = Menu::find($id);
     $request['user_id'] = \Auth::user()->id;
     $dato->fill($request->all());

@@ -55,7 +55,7 @@ class="active"
             <input type="text" name="" value="" id="pedido_pedido" class="form-control" list="list-pedido">
             <datalist id="list-pedido">
               @foreach($menus as $menu)
-                <option value="{{$menu->id}} | {{$menu->menu}}">
+                <option value="{{$menu->id}} | {{$menu->menu}}. {{$menu->precio}} Bs.">
               @endforeach
             </datalist>
           </div>

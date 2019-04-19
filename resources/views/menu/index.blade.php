@@ -41,13 +41,13 @@ class="active"
             {!! Form::text('precio', null, ['class'=>'form-control', 'placeholder'=>'Precio', 'id'=>'precio_', 'required']) !!}
           </div>
           <div class="col-md-3">
-            <label for="fecha_" > <b><i>Entidad</i></b> </label>
+            <label for="fecha_" > <b><i>Fecha</i></b> </label>
             {!! Form::date('fecha', null, ['class'=>'form-control', 'placeholder'=>'Fecha', 'id'=>'fecha_', 'required']) !!}
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="imagen_" > <b><i>Imagen</i></b> </label>
             {!! Form::file('imagen', null, ['class'=>'form-control', 'placeholder'=>'Imagen', 'id'=>'imagen_', 'required']) !!}
           </div>
@@ -57,6 +57,10 @@ class="active"
           <div class="col-md-5">
             <label for="receta_" > <b><i>Receta</i></b> </label>
             {!! Form::textarea('receta', null, ['class'=>'form-control', 'placeholder'=>'Receta', 'id'=>'receta_', 'required']) !!}
+          </div>
+          <div class="col-md-2">
+            <label for="permanente_" > <b><i>Permanente</i></b> </label>
+            {!! Form::checkbox('permanente', 'si', false, ['class'=>'form-control', 'placeholder'=>'Receta', 'id'=>'permanente_']) !!}
           </div>
         </div>
 
@@ -83,7 +87,7 @@ class="active"
                 </div>
 
                 <div class="modal-body panel-body">
-                    {!! Form::open(['route'=>['Proveedor.update', ':DATO_ID'], 'method'=>'PATCH', 'id'=>'form-update' ])!!}
+                    {!! Form::open(['route'=>['Menu.update', ':DATO_ID'], 'method'=>'PATCH', 'id'=>'form-update' ])!!}
 
                     <div class="row">
                       <div class="col-md-6">
@@ -95,13 +99,13 @@ class="active"
                         {!! Form::text('precio', null, ['class'=>'form-control', 'placeholder'=>'Precio', 'id'=>'precio', 'required']) !!}
                       </div>
                       <div class="col-md-3">
-                        <label for="fecha_" > <b><i>Entidad</i></b> </label>
+                        <label for="fecha_" > <b><i>Fecha</i></b> </label>
                         {!! Form::date('fecha', null, ['class'=>'form-control', 'placeholder'=>'Fecha', 'id'=>'fecha', 'required']) !!}
                       </div>
                     </div>
 
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <label for="imagen_" > <b><i>Imagen</i></b> </label><br>
                         <img src="" width="150" id="imagen" alt="">
                       </div>
@@ -109,8 +113,13 @@ class="active"
 
                       </div>
                       <div class="col-md-5">
-                        <label for="receta_" > <b><i>Receta</i></b> </label>
-                        {!! Form::text('receta', null, ['class'=>'form-control', 'placeholder'=>'Receta', 'id'=>'receta', 'required']) !!}
+                        <label for="receta" > <b><i>Receta</i></b> </label>
+                        {!! Form::textarea('receta', null, ['class'=>'form-control', 'placeholder'=>'Receta', 'id'=>'receta', 'required']) !!}
+                      </div>
+
+                      <div class="col-md-2">
+                        <label for="permanente" > <b><i>Permanente</i></b> </label>
+                        {!! Form::checkbox('permanente', 'si', false, null, ['class'=>'form-control', 'placeholder'=>'Receta', 'id'=>'permanente']) !!}
                       </div>
                     </div>
 
@@ -147,7 +156,11 @@ class="active"
                             </thead>
                             <tbody>
                                 @foreach($datos as $dato)
-                                    <tr data-id="{{ $dato->id }}">
+                                   @if($dato->permanente == "si")
+                                    <tr data-id="{{ $dato->id }}" style="background-color:#bcdcd1;">
+                                  @else
+                                    <tr data-id="{{ $dato->id }}" >
+                                  @endif
                                         <td>{{$dato->id}}</td>
                                         <td>{{$dato->menu}}</td>
                                         <td>{{$dato->precio}}</td>
