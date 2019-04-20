@@ -53,12 +53,12 @@
   span9.onclick = function() { modal9.style.display = "none"; }
 
    function initMap() {
-    var uluru = {lat: -19.5844895, lng: -65.7527863};
+    var uluru = {lat: {{$dato->latitud}}, lng: {{$dato->longitud}}};
     map = new google.maps.Map(document.getElementById('map'), { zoom: 15, center: uluru });
 
     /////////////////COMIDA
     var image12  = new google.maps.MarkerImage( '{{asset("img/comida130.png")}}', new google.maps.Size(130,130));
-    var place12  = new google.maps.LatLng(-19.583276020290292, -65.75961750176322);
+    var place12  = new google.maps.LatLng({{$dato->latitud}}, {{$dato->longitud}});
     var marker12 = new google.maps.Marker({ position: place12, map: map , title: 'Reserva' , icon: image12 , animation: google.maps.Animation.DROP,});
 
     function showInfoComida() {

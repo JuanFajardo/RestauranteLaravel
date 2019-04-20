@@ -24,7 +24,11 @@
     <script type="text/javascript">
         function loadLocation () {
           //inicializamos la funcion y definimos  el tiempo maximo ,las funciones de error y exito.
-          navigator.geolocation.getCurrentPosition(viewMap,ViewError,{timeout:1000});
+          if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(viewMap,ViewError,{timeout:1000});
+          }else{
+            alert("Tu bavegador no lo soporta");
+          }
         }
 
         //Funcion de exito
@@ -36,9 +40,20 @@
           document.getElementById("latitud").innerHTML = lat;
         }
         function ViewError (error) {
-        	alert( "Errr" + error.code);
+          switch(error.code) {
+               case error.PERMISSION_DENIED: alert("El usurio no compartió su ubicación geográfica");
+               break;
+               case error.POSITION_UNAVAILABLE: alert("No se pudo detectar la posición geográfica actual");
+               break;
+               case error.TIMEOUT: alert("Se ha agotado el tiempo de espera al consultar posición geográfica");
+               break;
+               default: alert("Error desconocido");
+               break;
+           }
         }
-
+        @isset($msj)
+          alert('Su pedido fue registrado correctamente');
+        @endif
     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -85,10 +100,22 @@
                         <br>
                         <input type="hidden" name="longitud" id="longitud" value="">
                         <input type="hidden" name="latitud" id="latitud" value="">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                              <input type="text" name="nombre" value="" class="form-control" placeholder="Nombre Completo">
+                            </div>
+                            <div class="col-xs-6 col-sm-3 col-md-2">
+                              <input type="text" name="ci" value="" class="form-control" placeholder="Numero de CI">
+                            </div>
+                            <div class="col-xs-6 col-sm-3 col-md-2">
+                              <input type="text" name="celular" value="" class="form-control" placeholder="Numero de Celular">
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                              <input type="text" name="direccion" value="" class="form-control" placeholder="Direccion">
+                            </div>
+                        </div>
 
-                        <input type="text" name="nombre" value="" class="form-control" placeholder="Nombre Completo">
-                        <input type="text" name="ci" value="" class="form-control" placeholder="Numero de CI">
-                        <input type="text" name="celular" value="" class="form-control" placeholder="Numero de Celular">
+
                         <br><br>
                         <?php $i=1; ?>
                        @foreach($datos as $dato)

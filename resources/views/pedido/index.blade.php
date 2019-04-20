@@ -224,7 +224,7 @@ class="active"
                                           @if( $dato->tipo == "Local" )
                                           <span class="badge badge-primary">Local</span>
                                           @else
-                                          <span class="badge badge-danger">Pedido</span>
+                                          <span class="badge badge-danger">Celular</span>
                                           @endif
                                         </td>
                                         <td>

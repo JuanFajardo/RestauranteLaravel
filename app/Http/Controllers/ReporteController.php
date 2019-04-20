@@ -37,6 +37,40 @@ class ReporteController extends Controller
     }
 
     public function celularPost(Request $request){
-      return $request->all();
+
+      $dato = new \App\Pedido;
+      $dato->nombre   = $request->nombre;
+      $dato->telefono = $request->celular;
+      $dato->direccion= $request->direccion;
+      $dato->ci       = $request->ci;
+      $dato->tipo     = $request->celular;
+      $dato->fecha    = date('Y-m-d');
+      $dato->hora     = date('Y-m-d H:i:s');
+      $dato->mesa     = "0";
+      $dato->estado   = "celular";
+      $dato->latitud  = $request->latitud  == "null" ?  $request->latitud : "-19.5891365";
+      $dato->longitud = $request->longitud  == "null" ? $request->longitud : "-65.7535577";
+      $dato->id_user  = "0";
+      $dato->save();
+
+      $id_pedido = \DB::table('pedidos')->max('id');
+      for($i=1; $i<=$request->canditdad; $i++){
+        $comida = \App\Menu::find($request["menu".$i]);
+        $detalle = new \App\Detalle;
+        $detalle->detalle   = $comida->menu;
+        $detalle->precio    = $comida->precio;
+        $detalle->cantidad  = $request["cantidad".$i];
+        $detalle->hora      = date('Y-m-d H:i:s');
+        $detalle->id_pedido = $id_pedido;
+        $detalle->id_menu   = $comida->id;
+        $detalle->id_user   = "0";
+        $detalle->save();
+      }
+
+      $datos = \DB::table('menus')->where('permanente', '=', 'si')
+                                  ->orWhere('fecha', 'like', '%'.date('Y-m-d').'%')
+                                  ->get();
+      $msj = "si";
+      return view('reporte.celular', compact('datos', 'msj'));
     }
 }
