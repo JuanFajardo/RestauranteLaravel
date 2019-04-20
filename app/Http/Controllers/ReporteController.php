@@ -22,15 +22,21 @@ class ReporteController extends Controller
       if ($request->button == "web"){
         return view("reporte.index", compact('datos') );
       }else{
-
         $view =  \View::make('reporte.pdf', compact('datos', 'inicio', 'fin'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('invoice');
-
-
-
       }
+    }
 
+    public function celular(){
+      $datos = \DB::table('menus')->where('permanente', '=', 'si')
+                                  ->orWhere('fecha', 'like', '%'.date('Y-m-d').'%')
+                                  ->get();
+      return view('reporte.celular', compact('datos'));
+    }
+
+    public function celularPost(Request $request){
+      return $request->all();
     }
 }
