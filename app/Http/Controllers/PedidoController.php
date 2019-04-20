@@ -65,7 +65,7 @@ class PedidoController extends Controller
   }
 
   public function update(Request $request, $id){
-    if(!isset($request->pagar ) ){
+    if(!isset( $request->pagar ) ){
       $request['fecha'] = date('Y-m-d');
       $request['hora']  = date('Y-m-d H:i:s');
       $request['estado']  = 'pedido';
@@ -99,10 +99,10 @@ class PedidoController extends Controller
       }
       return redirect('/Pedido');
     }else{
+
       $dato = Pedido::find($id);
       $dato->estado = "pagado";
       $dato->save();
-
       $costo_total    = \DB::table('detalles')->where('id_pedido', '=', $id)->sum('precio');
       $dosificacion   = Dosificacion::where('estado' , 'Activo')->get();
       $numero_factura = \DB::table('facturas')->max('numero_factura');

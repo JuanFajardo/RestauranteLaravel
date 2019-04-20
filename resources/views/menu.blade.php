@@ -62,7 +62,7 @@
         @endif
 
         <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
-        <li><a href="{{asset('index.php/Reporte/')}}"><i class="menu-icon fa fa-file-pdf-o"></i> Reporte Diario</a></li>
+        <li @yield('menuReporte')><a href="{{asset('index.php/Reporte')}}"><i class="menu-icon fa fa-file-pdf-o"></i> Reportes</a></li>
 
 
     </ul>

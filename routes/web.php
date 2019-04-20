@@ -32,3 +32,7 @@ Route::get('Pagar/{id}', 'PedidoController@pagar');
 Route::get('Facturar/{id}', 'PedidoController@factura');
 
 Route::get('Mapa/{id}', 'PedidoController@mapa');
+
+
+Route::get('Reporte', 'ReporteController@index');
+Route::post('Reporte', 'ReporteController@reporte')->name('reporte.generar');

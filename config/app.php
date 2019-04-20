@@ -169,6 +169,7 @@ return [
          * Package Service Providers...
          */
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
 
         /*
@@ -231,6 +232,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'QrCode'=> SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+	      'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

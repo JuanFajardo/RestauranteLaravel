@@ -1,33 +1,3 @@
-<!--
-0
-id	1
-nombre	"Juan Fajardo"
-telefono	"0"
-direccion	"0"
-ci	"6612330"
-tipo	"pagado"
-fecha	"2019-04-15"
-hora	"2019-04-15 03:02:18"
-mesa	"15"
-estado	"pagado"
-latitud	"0"
-longitud	"0"
-id_user	1
-created_at	"2019-04-15 03:11:10"
-updated_at	"2019-04-15 03:11:10"
-detalle	" Picante de pollo"
-precio	"15"
-cantidad	1
-id_pedido	1
-id_menu	1
-numero_factura	1
-nit	6612330
-total	15
-numero_autorizacion	"44566748"
-codigo_control	"38-12-E5-88"
-id_usuario	1
-id_dosificacion	1
--->
 
 
 <!DOCTYPE html>
@@ -167,7 +137,7 @@ id_dosificacion	1
             </div>
             <hr>
             <div>
-                <p>Son: {{\App\Clases\Letras::to_word( $datos[0]->precio )}}  00/100 Bolivianos</p>
+                <p>Son: {{\App\Clases\Letras::to_word( $datos[0]->total )}} </p>
             <hr>
                 <p>C&oacute;digo de control: <b>{{ $datos[0]->codigo_control }}</b></p>
                 <p>Fecha l&iacute;mite de emisi&oacute;n: <b>{{ $dosificacion[0]->fecha_limite_emision }}</b>
