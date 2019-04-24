@@ -32,6 +32,11 @@ class ClienteController extends Controller
     return $datos;
   }
 
+  public function ci($id){
+    $dato = \DB::table('clientes')->where('nit', '=', $id)->get();
+    return $dato;
+  }
+
   public function update(Request $request, $id){
     $dato = Cliente::find($id);
     $request['user_id'] = \Auth::user()->id;

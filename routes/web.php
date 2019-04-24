@@ -21,6 +21,7 @@ Route::get('Dosificacion/{nro_autorizacion}/{numero_factura}/{ci}/{fecha}/{costo
 Route::resource('Unidad', 'UnidadController');
 Route::resource('Bien', 'BienController');
 Route::resource('Cliente', 'ClienteController');
+Route::get('/Cliente/CI/{id}', 'ClienteController@ci');
 Route::resource('Empleado', 'EmpleadoController');
 Route::resource('Inventario', 'InventarioController');
 Route::resource('Pedido', 'PedidoController');

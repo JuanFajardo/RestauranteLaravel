@@ -38,6 +38,12 @@ class PedidoController extends Controller
     $request['estado']  = 'pedido';
     $request['id_user'] = \Auth::user()->id;
 
+    $cliente = new \App\Cliente;
+    $cliente->cliente   =$request->nombre;
+    $cliente->nit       =$request->ci;
+    $cliente->id_usuario=\Auth::user()->id;
+    $cliente->save();
+
     $dato = new Pedido;
     $dato->fill( $request->all() );
     $dato->save();

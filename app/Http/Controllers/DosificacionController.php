@@ -24,7 +24,7 @@ class DosificacionController extends Controller
       'nit'=>'required|numeric',
       'nro_autorizacion'=>'required|numeric',
       'llave'=>'required',
-      'titulo'=>'required|alpha',
+      'titulo'=>'required',
       'leyenda1'=>'required',
       'leyenda2'=>'required',
       ]);

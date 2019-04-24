@@ -231,6 +231,13 @@ class="active"
                       jQuery('#menu').val(el.menu);
                       jQuery('#precio').val(el.precio);
                       jQuery('#fecha').val(el.fecha);
+
+                      if(el.permanente == "si"){
+                        jQuery('#permanente').prop( "checked", true );
+                      }else{
+                        jQuery('#permanente').prop( "checked", false );
+                        }
+
                       jQuery('#imagen').attr("src", "{{asset('RughHXvNTFm9zzBett0zzPpFGaE2r7mjB9/')}}/"+el.imagen);
                       jQuery('#receta').val(el.receta);
                     });
