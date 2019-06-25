@@ -71,7 +71,9 @@ class PedidoController extends Controller
   }
 
   public function update(Request $request, $id){
+
     if(!isset( $request->pagar ) ){
+
       $request['fecha'] = date('Y-m-d');
       $request['hora']  = date('Y-m-d H:i:s');
       $request['estado']  = 'pedido';
@@ -82,30 +84,30 @@ class PedidoController extends Controller
       $dato->save();
 
       for ($i=1; $i <= $request->contador; $i++ ){
-
         $contador = \App\Detalle::find((explode("|", $request['pedido_'.$i]))[0]);
-
-        if( count($contador) > 0 ){
+        //return $request->all();
+        //if( count($contador) > 0 ){
           if(isset($request['eliminar_'.$i]) && $request->tipo != "pagado" ){
               $dato = \App\Detalle::find((explode("|", $request['pedido_'.$i]))[0]);
               $dato->delete();
           }
-        }else{
-          $dato = new \App\Detalle;
-          $dato->detalle  = (explode("|", $request['pedido_'.$i]))[1];
-          $dato->precio   = $request['precio_'.$i];
-          $dato->cantidad = $request['cantidad_'.$i];
-          $dato->hora     = date('Y-m-d H:i:s');
-          $dato->id_pedido= $id;
-          $dato->id_menu  = (explode("|", $request['pedido_'.$i]))[0];
-          $dato->id_user  = \Auth::user()->id;
-          $dato->save();
-        }
-
+        //}else{
+          if($request['id_'.$i] == "0"){
+            $dato = new \App\Detalle;
+            $dato->detalle  = (explode("|", $request['pedido_'.$i]))[1];
+            $dato->precio   = $request['precio_'.$i];
+            $dato->cantidad = $request['cantidad_'.$i];
+            $dato->hora     = date('Y-m-d H:i:s');
+            $dato->id_pedido= $id;
+            $dato->id_menu  = (explode("|", $request['pedido_'.$i]))[0];
+            $dato->id_user  = \Auth::user()->id;
+            $dato->save();
+          }
+        //}
       }
+
       return redirect('/Pedido');
     }else{
-
       $dato = Pedido::find($id);
       $dato->estado = "pagado";
       $dato->save();

@@ -142,7 +142,7 @@ class="active"
                         <input type="text" name="" value="" id="pedido_pedido_" class="form-control" list="list-pedido_">
                         <datalist id="list-pedido_">
                           @foreach($menus as $menu)
-                            <option value="{{$menu->id}} | {{$menu->menu}}">
+                            <option value="{{$menu->id}} | {{$menu->menu}}. {{$menu->precio}} Bs.">
                           @endforeach
                         </datalist>
                       </div>
@@ -376,6 +376,7 @@ class="active"
                     jQuery.each(data, function(index, el) {
                       contador ++;
                       html  = html+  "<tr data-id='"+contador+"'>"+
+                                         "<input type='hidden'       name='id_"+contador+"' value='"+el.id+"' >" +
                                          "<td><input type='text'     id='pedido_"+contador+"_' name='pedido_"+contador+"' value='"+el.id+"|"+el.detalle+"' class='form-control'></td>" +
                                          "<td><input type='text'     id='cantidad_"+contador+"_' name='cantidad_"+contador+"' value='"+el.cantidad+"' class='form-control'></td>" +
                                          "<td><input type='text'     id='precio_"+contador+"_' name='precio_"+contador+"' value='"+el.precio+"' class='form-control'></td>" +
@@ -398,6 +399,7 @@ class="active"
                 contador  =  parseInt(contador) + 1;
                 var texto = jQuery('#cuerpoTabla_').html();
                 var html  = texto + "<tr data-id='"+contador+"'>"+
+                                    "<input type='hidden'       name='id_"+contador+"' value='0' >" + 
                                    "<td><input type='text'     id='pedido_"+contador+"_' name='pedido_"+contador+"' value='"+producto+"' class='form-control'></td>" +
                                    "<td><input type='text'     id='cantidad_"+contador+"_' name='cantidad_"+contador+"' value='"+cantidad+"' class='form-control'></td>" +
                                    "<td><input type='text'     id='precio_"+contador+"_' name='precio_"+contador+"' value='"+precio+"' class='form-control'></td>" +
