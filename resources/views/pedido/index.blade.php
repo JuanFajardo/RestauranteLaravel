@@ -228,10 +228,15 @@ class="active"
                                           @endif
                                         </td>
                                         <td>
+
                                           @if( $dato->estado == "pedido" )
                                           <span class="badge badge-dark">Pedido</span>
                                           @elseif($dato->estado == "pagado" )
                                           <span class="badge badge-info">Pagado</span>
+                                          @elseif($dato->estado == "preparar" )
+                                          <span class="badge badge-warning">Preparandose</span>
+                                          @elseif($dato->estado == "servir" )
+                                          <span class="badge badge-danger">Servido</span>
                                           @elseif($dato->estado == "facturado" )
                                           <span class="badge badge-success">Factura</span>
                                           @endif
