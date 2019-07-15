@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
-
+<html lang="es" class="no-js">
 <head>
     <!--- Basic Page Needs  -->
     <meta charset="utf-8">
@@ -113,6 +112,10 @@
                             <div class="col-xs-12 col-sm-6 col-md-4">
                               <input type="text" name="direccion" value="" class="form-control" placeholder="Direccion">
                             </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-2">
+                              <input type="text" name="precio" value="0" class="btn btn-info" id="precio" readonly>
+                            </div>
                         </div>
 
 
@@ -125,20 +128,28 @@
                                     <div class="preview-content-thumb" style="background-image: url('{{asset('RughHXvNTFm9zzBett0zzPpFGaE2r7mjB9/'.$dato->imagen)}}')"></div>
                                 </div>
                                 <div class="thumb-title">
-                                    <b>Elegir</b> <input type="checkbox" name="menu{{$i}}"  value="{{$dato->id}}"> <h2><a href="#" > {{$dato->menu}} {{$dato->precio}}Bs. </a></h2>
-                                    <select class="form-control" name="cantidad{{$i}}">
-                                      <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9<option value="10">10</option>
-                                      <option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="1">1</option><option value="20">20</option>
-                                    </select>
+
+                                    <b>Elegir</b> <input type="checkbox" name="menu{{$i}}"  value="{{$dato->id}}"  id="menu{{$i}}" onclick="cambio('{{$i}}')"> <h2><a href="#" > {{$dato->menu}} {{$dato->precio}}Bs. </a></h2>
+                                    <input type="hidden" id="precio{{$i}}" value="{{$dato->precio}}">
+
+                                    <div class="row">
+                                      <div class="col-xs-2 col-sm-2 col-md-2" style="font-size:large;">
+                                        <b onclick="sumar('{{$i}}')" class="btn btn-success"> + </b>
+                                      </div>
+                                      <div class="col-xs-8 col-sm-8 col-md-8" >
+                                        <input type="text" id="cantida{{$i}}" name="cantida{{$i}}" value="0" readonly>
+                                      </div>
+                                      <div class="col-xs-2 col-sm-2 col-md-2" style="font-size:large;">
+                                        <b onclick="restar('{{$i}}')" class="btn btn-danger"> - </b>
+                                      </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </div><?php $i++; ?>
                         @endforeach
                         <input type="hidden" name="cantidad" id="cantidad" value="{{$i}}">
                         <input type="submit" name="" value="Hacer Pedido" class="btn btn-success form-control">
-
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -159,6 +170,39 @@
     <script src="{{asset('appson/js/jquery-1.12.4.min.js')}}"></script>
     <script src="{{asset('appson/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('appson/js/theme.js')}}"></script>
+
+    <script type="text/javascript">
+      function sumar(dato){
+        var id          = '#menu'+dato;
+        var idPrecio    = '#precio'+dato;
+        var idCantidad  = '#cantida'+dato;
+        var actual      = $('#precio').val();
+
+        var cantidad    = $(idCantidad).val();
+        cantidad = parseFloat(cantidad) + 1;
+        $(idCantidad).val(cantidad);
+        console.log(idCantidad);
+
+        var precio      = $(idPrecio).val();
+        var suma  = parseFloat(precio) + parseFloat(actual);
+        $('#precio').val(suma);
+      }
+
+      function restar(dato){
+        var id          = '#menu'+dato;
+        var idPrecio    = '#precio'+dato;
+        var idCantidad  = '#cantida'+dato;
+        var actual      = $('#precio').val();
+
+        var cantidad    = $(idCantidad).val();
+        cantidad = parseFloat(cantidad) - 1;
+        $(idCantidad).val(cantidad);
+
+        var precio      = $(idPrecio).val();
+        var suma  = parseFloat(actual) - parseFloat(precio);
+        $('#precio').val(suma);
+      }
+    </script>
 </body>
 
 </html>
