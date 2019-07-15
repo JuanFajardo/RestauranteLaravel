@@ -184,11 +184,11 @@ class="active"
         });
 
 
-        Jquery('.eliminar').click(function(event) {
+        jQuery('.eliminar').click(function(event) {
             event.preventDefault();
-            var fila = Jquery(this).parents('tr');
+            var fila = jQuery(this).parents('tr');
             var id = fila.data('id');
-            var form = Jquery('#form-delete');
+            var form = jQuery('#form-delete');
             var url = form.attr('action').replace(':DATO_ID',id);
             var data = form.serialize();
 
