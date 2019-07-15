@@ -5,7 +5,7 @@
     PEDIDO
   </div>
   <div class="col-md-6 text-right">
-    <a href="#modalAgregar"   data-toggle="modal" class="nuevo" data-target=""> <li class="fa fa-plus"></li> Nuevo PEDIDO</a> <br/>
+    <a href="#modalAgregar"   data-toggle="modal" class="nuevo" data-target="" accesskey="n"> <li class="fa fa-plus"></li> <u>N</u>uevo PEDIDO</a> <br/>
   </div>
 </div>
 @endsection
@@ -238,7 +238,7 @@ class="active"
                                         </td>
                                         <td>{{$dato->mesa}}</td>
                                         <td>
-                                          <a href="#modalModifiar"  data-toggle="modal" class="actualizar" style="color: #B8823B;"> <li class="fa fa-edit"></li> Editar</a> &nbsp;&nbsp;&nbsp;
+                                          <a href="#modalModifiar"  data-toggle="modal" class="actualizar" style="color: #B8823B;" accesskey="e" > <li class="fa fa-edit"></li>Editar</a> &nbsp;&nbsp;&nbsp;
                                           @if($dato->estado == "facturado" || $dato->estado == "pagado"   )
                                             <a href="{{asset('/index.php/Facturar/'.$dato->id)}}"  style="color: #1c48b4;"> <li class="fa fa-qrcode"></li> Factura</a> &nbsp;&nbsp;&nbsp;
                                           @endif
@@ -399,7 +399,7 @@ class="active"
                 contador  =  parseInt(contador) + 1;
                 var texto = jQuery('#cuerpoTabla_').html();
                 var html  = texto + "<tr data-id='"+contador+"'>"+
-                                    "<input type='hidden'       name='id_"+contador+"' value='0' >" + 
+                                    "<input type='hidden'       name='id_"+contador+"' value='0' >" +
                                    "<td><input type='text'     id='pedido_"+contador+"_' name='pedido_"+contador+"' value='"+producto+"' class='form-control'></td>" +
                                    "<td><input type='text'     id='cantidad_"+contador+"_' name='cantidad_"+contador+"' value='"+cantidad+"' class='form-control'></td>" +
                                    "<td><input type='text'     id='precio_"+contador+"_' name='precio_"+contador+"' value='"+precio+"' class='form-control'></td>" +

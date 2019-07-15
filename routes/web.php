@@ -27,6 +27,11 @@ Route::resource('Inventario', 'InventarioController');
 Route::resource('Pedido', 'PedidoController');
 Route::resource('Menu', 'MenuController');
 
+Route::get('Preparado', 'PedidoController@preparado');
+Route::get('Preparado/Pedido/{id}', 'PedidoController@pedido');
+Route::get('Preparado/Preparar/{id}', 'PedidoController@preparar');
+
+
 Route::get('Pedidos/{id}', 'PedidoController@pedidos');
 
 Route::get('Pagar/{id}', 'PedidoController@pagar');

@@ -17,7 +17,7 @@ class CreatePedidosTable extends Migration{
             $table->date('fecha');
             $table->dateTime('hora');
             $table->string('mesa');
-            $table->string('estado')->commet('pedido/pagado/facturado');
+            $table->string('estado')->commet('pedido/preparar/servir/pagado/facturado');
             $table->string('latitud');
             $table->string('longitud');
             $table->integer('id_user');

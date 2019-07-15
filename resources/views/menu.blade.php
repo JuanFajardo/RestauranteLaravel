@@ -11,6 +11,9 @@
         <li @yield('menuPedido')>
             <a href="{{asset('index.php/Pedido')}}"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Pedido</a>
         </li>
+        <li @yield('menuPreparado')>
+            <a href="{{asset('index.php/Preparado')}}"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Preparado</a>
+        </li>
         <li @yield('menuMenu')>
             <a href="{{asset('index.php/Menu')}}"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Menu</a>
         </li>
