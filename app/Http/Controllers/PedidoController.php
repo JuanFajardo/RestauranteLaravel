@@ -169,29 +169,17 @@ class PedidoController extends Controller
   }
 
   public function mapa($id){
-    $dato = Pedido::find($id);
+    $dato = \DB::table('pedidos')->join('detalles', 'pedidos.id', '=', 'detalles.id_pedido')
+                                 ->where('pedidos.id', '=', $id)
+                                 ->select('pedidos.*', 'detalles.*')
+                                 ->get();
+                                // return $dato;
     return view('pedido.mapa', compact('dato'));
   }
 
 ////////////////////////////////////////////////Preparado
 
   public function preparado(){
-    /*
-    'detalles', function (Blueprint $table) {
-        $table->increments('id');
-        $table->string('detalle');
-        $table->string('precio');
-        $table->string('cantidad');
-        $table->dateTime('hora');
-        $table->integer('id_pedido');
-        $table->integer('id_menu');
-        $table->integer('id_user');
-
-
-        $table->string('estado')->commet('pedido/preparar/servir/pagado/facturado');
-
-    protected $fillable = [ 'id', 'nombre', 'telefono', 'direccion', 'ci', 'tipo', 'fecha', 'hora', 'mesa', 'estado', 'latitud', 'longitud', 'id_user' ];
-    */
     $datos = \DB::table('pedidos')->where('pedidos.estado', '=', 'pedido')
                                   ->Orwhere('pedidos.estado', '=', 'preparar')
                                   ->Orwhere('pedidos.estado', '=', 'servir')

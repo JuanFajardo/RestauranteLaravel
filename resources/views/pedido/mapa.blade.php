@@ -24,11 +24,35 @@
 
     <div id="comida" class="modal">
       <div class="modal-content">
-        <p>Pizzeria Maná</p><br>
-        <b style="font-size:20px;">Datos del pedido</b><br>
-        <b>Nombre</b> {{$dato->nombre}}<br>
-        <b>Telefono</b> {{$dato->telefono}}<br>
-        <b>Direccion</b> {{$dato->direccion}}<br>
+        <div class="row">
+          <div class="col-md-6">
+            <p>Pizzeria Maná</p><br>
+            <b style="font-size:20px;">Datos del pedido</b><br>
+            <b>Nombre</b> {{$dato[0]->nombre}}<br>
+            <b>Telefono</b> {{$dato[0]->telefono}}<br>
+            <b>Direccion</b> {{$dato[0]->direccion}}<br>
+          </div>
+          <div class="col-md-6">
+            <table class="table ">
+              <thead>
+                <tr>
+                  <th>Pedido</th> <th>Cantidad</th> <th>Precio</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($dato as $dat)
+                <tr>
+                  <td>{{$dat->detalle}}</td>
+                  <td>{{$dat->cantidad}}</td>
+                  <td>{{$dat->precio}}</td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -53,12 +77,12 @@
   span9.onclick = function() { modal9.style.display = "none"; }
 
    function initMap() {
-    var uluru = {lat: {{$dato->latitud}}, lng: {{$dato->longitud}}};
+    var uluru = {lat: {{$dato[0]->latitud}}, lng: {{$dato[0]->longitud}}};
     map = new google.maps.Map(document.getElementById('map'), { zoom: 15, center: uluru });
 
     /////////////////COMIDA
     var image12  = new google.maps.MarkerImage( '{{asset("img/comida130.png")}}', new google.maps.Size(130,130));
-    var place12  = new google.maps.LatLng({{$dato->latitud}}, {{$dato->longitud}});
+    var place12  = new google.maps.LatLng({{$dato[0]->latitud}}, {{$dato[0]->longitud}});
     var marker12 = new google.maps.Marker({ position: place12, map: map , title: 'Reserva' , icon: image12 , animation: google.maps.Animation.DROP,});
 
     function showInfoComida() {

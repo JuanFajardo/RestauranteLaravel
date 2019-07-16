@@ -100,27 +100,38 @@
                         <input type="hidden" name="longitud" id="longitud" value="">
                         <input type="hidden" name="latitud" id="latitud" value="">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                              <input type="text" name="nombre" value="" class="form-control" placeholder="Nombre Completo">
-                            </div>
-                            <div class="col-xs-6 col-sm-3 col-md-2">
-                              <input type="text" name="ci" value="" class="form-control" placeholder="Numero de CI">
-                            </div>
-                            <div class="col-xs-6 col-sm-3 col-md-2">
-                              <input type="text" name="celular" value="" class="form-control" placeholder="Numero de Celular">
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                              <input type="text" name="direccion" value="" class="form-control" placeholder="Direccion">
-                            </div>
 
-                            <div class="col-xs-12 col-sm-6 col-md-2">
-                              <input type="text" name="precio" value="0" class="btn btn-info" id="precio" readonly>
+
+
+
+                           <div class="input-group col-xs-12 col-sm-12 col-md-12">
+                              <span class="input-group-addon">CI</span>
+                              <input type="number" name="ci" value="" class="form-control" placeholder="Numero de CI" required min="1" pattern="^[0-9]+">
                             </div>
+                            <div class="input-group col-xs-12 col-sm-12 col-md-12">
+                               <span class="input-group-addon">Celular</span>
+                               <input type="number" name="celular" value="" class="form-control" placeholder="Numero de Celular" required min="1" pattern="^[0-9]+">
+                             </div>
+                             <div class="input-group col-xs-12 col-sm-12 col-md-12">
+                                <span class="input-group-addon">Direccion</span>
+                                <input type="text" name="direccion" value="" class="form-control" placeholder="Direccion" required>
+                              </div>
+
+                              <div class="input-group col-xs-12 col-sm-12 col-md-12">
+                                 <span class="input-group-addon">Nombres</span>
+                                 <input type="text" name="nombre" value="" class="form-control" placeholder="Nombre Completo" onkeypress="return soloLetras(event)" required>
+                               </div>
+
+                              <div class="input-group col-xs-12 col-sm-12 col-md-12">
+                                 <span class="input-group-addon">Monto Bs.</span>
+                                 <input type="text" name="precio" value="0" class="btn btn-info" id="precio" readonly>
+                               </div>
+
                         </div>
 
 
                         <br><br>
-                        <?php $i=1; ?>
+                        <?php $i=0; ?>
                        @foreach($datos as $dato)
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="single-preview">
@@ -137,7 +148,7 @@
                                         <b onclick="sumar('{{$i}}')" class="btn btn-success"> + </b>
                                       </div>
                                       <div class="col-xs-8 col-sm-8 col-md-8" >
-                                        <input type="text" id="cantida{{$i}}" name="cantida{{$i}}" value="0" readonly>
+                                        <input type="text" id="cantida{{$i}}" name="cantida{{$i}}" value="0" readonly class="btn btn-info">
                                       </div>
                                       <div class="col-xs-2 col-sm-2 col-md-2" style="font-size:large;">
                                         <b onclick="restar('{{$i}}')" class="btn btn-danger"> - </b>
@@ -147,7 +158,7 @@
                             </div>
                         </div><?php $i++; ?>
                         @endforeach
-                        <input type="hidden" name="cantidad" id="cantidad" value="{{$i}}">
+                        <input type="hidden" name="cantidad" id="cantidad" value="{{count($datos)}}">
                         <input type="submit" name="" value="Hacer Pedido" class="btn btn-success form-control">
                         </form>
                     </div>
@@ -172,6 +183,25 @@
     <script src="{{asset('appson/js/theme.js')}}"></script>
 
     <script type="text/javascript">
+    function soloLetras(e){
+      key = e.keyCode || e.which;
+      tecla = String.fromCharCode(key).toLowerCase();
+      letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+      especiales = "8-37-39-46";
+
+      tecla_especial = false
+      for(var i in especiales){
+           if(key == especiales[i]){
+               tecla_especial = true;
+               break;
+           }
+       }
+
+       if(letras.indexOf(tecla)==-1 && !tecla_especial){
+           return false;
+       }
+   }
+
       function sumar(dato){
         var id          = '#menu'+dato;
         var idPrecio    = '#precio'+dato;
