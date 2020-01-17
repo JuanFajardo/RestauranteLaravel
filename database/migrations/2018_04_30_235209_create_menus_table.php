@@ -15,6 +15,8 @@ class CreateMenusTable extends Migration
           $table->date('fecha');
           $table->string('imagen');
           $table->text('receta');
+          $table->text('tipo')->commet('PIZZAS, EXTRAS, BEBIDAS, PROMOCIONES');
+          //->commet('personal, mediana, familiar');
           $table->text('permanente')->comment('si - para la soda y cosas que siempre estaran');
           $table->integer('id_usuario');
           $table->softDeletes();

@@ -13,8 +13,12 @@ class DosificacionController extends Controller
 
   public function index(){
     $dosificaciones=\DB::table('dosificacions')->get();
-    $actual=\DB::table('dosificacions')->orderBy('id','DESC')->first();
-    $flag=(count($actual)==0)? 0:1;
+
+    $actual = \DB::table('dosificacions')->select('dosificacions.*')->orderBy('id','DESC')->get();
+    //$actual = $actual[0];
+    //return $actual;
+    $flag = ( count($actual) == 0 ) ? 0 : 1;
+
     return view("dosificacion.index",compact("dosificaciones","actual","flag"));
   }
 

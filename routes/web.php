@@ -43,5 +43,7 @@ Route::get('Mapa/{id}', 'PedidoController@mapa');
 Route::get('Reporte', 'ReporteController@index');
 Route::post('Reporte', 'ReporteController@reporte')->name('reporte.generar');
 
-Route::get('Celular', 'ReporteController@celular');
-Route::post('Celular', 'ReporteController@celularPost');
+
+Route::get('Celular', 'ReporteController@celularMapa');
+Route::post('Llenar', 'ReporteController@celular')->name('celular.pedido');
+Route::post('Celular', 'ReporteController@celularPost')->name('celular.post');

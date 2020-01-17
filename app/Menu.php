@@ -8,7 +8,7 @@ class Menu extends Model
 {
   use SoftDeletes;
   protected $table    = 'menus';
-  protected $fillable = [ 'id', 'menu', 'precio', 'fecha', 'imagen', 'receta',  'permanente', 'id_usuario' ];
+  protected $fillable = [ 'id', 'menu', 'precio', 'fecha', 'imagen', 'receta', 'tipo',  'permanente', 'id_usuario' ];
   protected $dates    = ['deleted_at'];
 
   public function setImagenAttribute($imagen){

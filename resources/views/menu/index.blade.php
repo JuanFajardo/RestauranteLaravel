@@ -32,9 +32,13 @@ class="active"
         {!! Form::open(['accept-charset'=>'UTF-8', 'enctype'=>'multipart/form-data', 'method'=>'POST', 'files'=>true, 'autocomplete'=>'off', 'id'=>'form-insert'] ) !!}
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="menu_" > <b><i>Menu</i></b> </label>
             {!! Form::text('menu', null, ['class'=>'form-control letras', 'placeholder'=>'Menu', 'id'=>'menu_', 'required']) !!}
+          </div>
+          <div class="col-md-2">
+            <label for="tipo_" > <b><i>Tipo</i></b> </label>
+            {!! Form::select('tipo', ['PIZZAS'=>'PIZZAS', 'EXTRAS'=>'EXTRAS', 'BEBIDAS'=>'BEBIDAS', 'PROMOCIONES'=>'PROMOCIONES'], null, ['class'=>'form-control letras', 'placeholder'=>' ', 'id'=>'tipo_', 'required']) !!}
           </div>
           <div class="col-md-3">
             <label for="precio_" > <b><i>Precio</i></b> </label>
@@ -90,9 +94,13 @@ class="active"
                     {!! Form::open(['route'=>['Menu.update', ':DATO_ID'], 'method'=>'PATCH', 'id'=>'form-update' ])!!}
 
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <label for="menu_" > <b><i>Menu</i></b> </label>
                         {!! Form::text('menu', null, ['class'=>'form-control letras', 'placeholder'=>'Menu', 'id'=>'menu', 'required']) !!}
+                      </div>
+                      <div class="col-md-2">
+                        <label for="tipo" > <b><i>Tipo</i></b> </label>
+                        {!! Form::select('tipo', ['PIZZAS'=>'PIZZAS', 'EXTRAS'=>'EXTRAS', 'BEBIDAS'=>'BEBIDAS', 'PROMOCIONES'=>'PROMOCIONES'], null, ['class'=>'form-control letras', 'placeholder'=>' ', 'id'=>'tipo', 'required']) !!}
                       </div>
                       <div class="col-md-3">
                         <label for="precio_" > <b><i>Precio</i></b> </label>
@@ -148,6 +156,7 @@ class="active"
                                 <tr>
                                     <th>Id</th>
                                     <th>Menu</th>
+                                    <th>Tipo</th>
                                     <th>Precio</th>
                                     <th>Fecha</th>
                                     <th>Imagen</th>
@@ -163,6 +172,7 @@ class="active"
                                   @endif
                                         <td>{{$dato->id}}</td>
                                         <td>{{$dato->menu}}</td>
+                                        <td>{{$dato->tipo}}</td>
                                         <td>{{$dato->precio}}</td>
                                         <td>{{$dato->fecha}}</td>
                                         <td> <img src="{{asset('RughHXvNTFm9zzBett0zzPpFGaE2r7mjB9/'.$dato->imagen)}}" width="50" alt=""></td>
@@ -231,14 +241,13 @@ class="active"
                       jQuery('#menu').val(el.menu);
                       jQuery('#precio').val(el.precio);
                       jQuery('#fecha').val(el.fecha);
-
                       if(el.permanente == "si"){
                         jQuery('#permanente').prop( "checked", true );
                       }else{
                         jQuery('#permanente').prop( "checked", false );
                         }
-
                       jQuery('#imagen').attr("src", "{{asset('RughHXvNTFm9zzBett0zzPpFGaE2r7mjB9/')}}/"+el.imagen);
+                      jQuery('#tipo').val(el.tipo);
                       jQuery('#receta').val(el.receta);
                     });
                 }else{
@@ -255,7 +264,6 @@ class="active"
             var form = jQuery('#form-delete');
             var url = form.attr('action').replace(':DATO_ID',id);
             var data = form.serialize();
-
             if(confirm('Esta seguro de eliminar al Empleado'))
             {
                 jQuery.post(url, data, function(result, textStatus, xhr) {
@@ -266,7 +274,5 @@ class="active"
                 });
             }
         });
-
-
     </script>
 @endsection

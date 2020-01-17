@@ -29,15 +29,28 @@ class ReporteController extends Controller
       }
     }
 
-    public function celular(){
-      $datos = \DB::table('menus')->where('permanente', '=', 'si')
-                                  ->orWhere('fecha', 'like', '%'.date('Y-m-d').'%')
-                                  ->get();
-      return view('reporte.celular', compact('datos'));
+    public function celularMapa(){
+      return view('reporte.mapa');
     }
 
+    public function celular(Request $request){
+      $latitud = $request->coordenadaX;
+      $longitud = $request->coordenadaY;
+      $datos = \DB::table('menus')->where('permanente', '=', 'si')
+                                  ->where('deleted_at', null)
+                                  ->whereNull('deleted_at')
+                                  ->orWhere('fecha', 'like', '%'.date('Y-m-d').'%')
+                                  ->orderBy('tipo', 'asc')
+                                  ->get();
+      return view('reporte.celular', compact('datos', 'latitud', 'longitud'));
+    }
+
+
     public function celularPost(Request $request){
+      //return $request->all();
       $n = $request->cantidad;
+      $latitud = $request->latitud;
+      $longitud = $request->longitud;
 
       $dato = new \App\Pedido;
       $dato->nombre   = $request->nombre;
@@ -49,8 +62,8 @@ class ReporteController extends Controller
       $dato->hora     = date('Y-m-d H:i:s');
       $dato->mesa     = "0";
       $dato->estado   = "pedido";
-      $dato->latitud  = $request->latitud  == "null" ?  $request->latitud : "-19.5891365";
-      $dato->longitud = $request->longitud  == "null" ? $request->longitud : "-65.7535577";
+      $dato->latitud  = $latitud;
+      $dato->longitud = $longitud;
       $dato->id_user  = "0";
       $dato->save();
 
@@ -69,12 +82,11 @@ class ReporteController extends Controller
           $detalle->save();
         }
       }
-
-
       $datos = \DB::table('menus')->where('permanente', '=', 'si')
                                   ->orWhere('fecha', 'like', '%'.date('Y-m-d').'%')
+                                  ->orderBy('tipo', 'asc')
                                   ->get();
       $msj = "si";
-      return view('reporte.celular', compact('datos', 'msj'));
+      return view('reporte.celular', compact('datos', 'msj', 'latitud', 'longitud'));
     }
 }

@@ -313,7 +313,7 @@ class="active"
 <script type="text/javascript">
 jQuery(document).ready(function(){
             jQuery('#tablaDosificacion').DataTable({
-                "order": [[ 0, 'asc']],
+                "order": [[ 0, 'desc']],
                 "language":
                 {
                     "bDeferRender": true,
